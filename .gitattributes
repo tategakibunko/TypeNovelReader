@@ -3,4 +3,4 @@
 *.AppImage filter=lfs diff=lfs merge=lfs -text
 release/TypeNovelReader-0.9.9.dmg filter=lfs diff=lfs merge=lfs -text
 release/TypeNovelReader-0.9.9.AppImage filter=lfs diff=lfs merge=lfs -text
-release/TypeNovelReader-0.9.9.exe filter=lfs diff=lfs merge=lfs -text
+release/TypeNovelReader[[:space:]]0.9.9.exe filter=lfs diff=lfs merge=lfs -text
