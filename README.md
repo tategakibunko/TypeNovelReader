@@ -26,11 +26,11 @@ It supports both vertical writing and horizontal writing, so it can be used for 
 
 ### And more!
 
-For other functions, please run the [example](examples/) and check it.
+For other functions, please run the [examples](/examples) and check it.
 
 ## Install
 
-[Installers(Windows, Mac, Linux)](release/).
+[Installers(Windows, Mac, Linux)](/release).
 
 `*.exe` is Windows Installer.
 
@@ -102,4 +102,4 @@ Here is example.
 
 Your original `tnconfig.json`.
 
-If it's not included, [default tnconfig.json](https://github.com/tategakibunko/TypeNovelReader/blob/master/tnc/config/init.tnconfig.json) is used.
+If it's not included, [default tnconfig.json](/tnc/config/init.tnconfig.json) is used.

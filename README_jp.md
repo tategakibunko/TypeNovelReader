@@ -26,11 +26,11 @@ TypeNovelを[SemanticNovel](https://github.com/tategakibunko/SemanticNovel)の�
 
 ### その他
 
-その他の機能については[example](https://github.com/tategakibunko/TypeNovelReader/tree/master/release)を実際に動かして確認して下さい。
+その他の機能については[examples](/examples)を実際に動かして確認して下さい。
 
 ## インストール
 
-[Installers(Windows, Mac, Linux)](https://github.com/tategakibunko/TypeNovelReader/tree/master/release).
+[Installers(Windows, Mac, Linux)](/release).
 
 `*.exe`はWindows用のインストーラーです。
 
