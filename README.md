@@ -102,4 +102,4 @@ Here is example.
 
 Your original `tnconfig.json`.
 
-If it's not included, [default tnconfig.json](https://github.com/tategakibunko/TypeNovelReader/tree/master/tnc/config/init.config.json) is used.
+If it's not included, [default tnconfig.json](tnc/config/init.config.json) is used.

@@ -97,4 +97,4 @@ zipソースは`index.tn`, `data.json`, `tnconfig.json`やその他のファイ�
 
 自分独自の`tnconfig.json`ファイルです。
 
-もし含まれていない場合は、[初期設定のファイル](https://github.com/tategakibunko/TypeNovelReader/tree/master/tnc/config/init.config.json)が使用されます。
+もし含まれていない場合は、[初期設定のファイル](tnc/config/init.tnconfig.json)が使用されます。
