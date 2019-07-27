@@ -103,3 +103,7 @@ Here is example.
 Your original `tnconfig.json`.
 
 If it's not included, [default tnconfig.json](/tnc/config/init.tnconfig.json) is used.
+
+## LICENSE
+
+See [LICENSE](LISENCE) for detail.

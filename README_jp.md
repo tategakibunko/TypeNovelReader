@@ -98,3 +98,8 @@ zipソースは`index.tn`, `data.json`, `tnconfig.json`やその他のファイ�
 自分独自の`tnconfig.json`ファイルです。
 
 もし含まれていない場合は、[初期設定のファイル](/tnc/config/init.tnconfig.json)が使用されます。
+
+## ライセンス
+
+詳しくは[LICENSE](LICENSE)をご確認下さい。
+
