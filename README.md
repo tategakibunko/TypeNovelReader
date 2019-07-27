@@ -106,4 +106,4 @@ If it's not included, [default tnconfig.json](/tnc/config/init.tnconfig.json) is
 
 ## LICENSE
 
-See [LICENSE](/LISENCE) for detail.
+See [LICENSE](/LICENCE) for detail.
