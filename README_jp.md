@@ -101,5 +101,5 @@ zipソースは`index.tn`, `data.json`, `tnconfig.json`やその他のファイ�
 
 ## ライセンス
 
-詳しくは[LICENSE](LICENSE)をご確認下さい。
+詳しくは[LICENSE](/LICENSE)をご確認下さい。
 
