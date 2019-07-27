@@ -1,8 +1,8 @@
 # TypeNovelReader
 
-TypeNovelReader is reader application for the text written by [TypeNovel](https://github.com/tategakibunko/TypeNovel).
+TypeNovelReader is reader application for [TypeNovel](https://github.com/tategakibunko/TypeNovel).
 
-If you write novel according to spec of [SemanticNovel](https://github.com/tategakibunko/SemanticNovel), plenty of context information is applied to reader UI.
+If you write novel according to the spec of [SemanticNovel](https://github.com/tategakibunko/SemanticNovel), plenty of context information is applied to reader UI.
 
 ## Feature
 
