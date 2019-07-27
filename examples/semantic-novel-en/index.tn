@@ -1,0 +1,129 @@
+/*
+  For ease of use for sample, we write this contents by one file,
+  but usually we recommend you devide the source by using $include tag.
+  [example] $include('chapter1.tn')
+*/
+@scene({
+  season:"spring"
+}){
+  @scene({
+    date: "4/1"
+  }){
+    @scene({
+      time:"6:00"
+    }){
+      @h1(){ Hello, World! }
+      @h2(){ Speech text }
+      @p(){
+	Speaker of speech is displayed at the head of speech as small icon.
+	Name of speaker popup if you hover the icon.
+	Description of speaker is displayed if you click the icon.
+      }
+      @h3(){ Normal Speechh }
+      @speak('john'){
+	"Hi there!"
+      }
+      @h2(){ Speech Bubble }
+      @sb-start('hanako', 'normal'){
+	speech text here.
+      }
+      @sb-end('john', 'normal'){
+	speech text here.
+      }
+    }
+  }
+}
+
+@scene({
+  season:"summer"
+}){
+  @scene({
+    date:"8/1"
+  }){
+    @scene({
+      time: "12:00"
+    }){
+      @h2(){ Tip, Notes }
+      @p(){
+	This is @tip("tip"){ this is tip content! }. Usefull for supplementary sentence.
+      }
+      /* you can use '$tip' instead of '@tip' if inner content is text only.
+      @p(){
+	This is $tip("tip", "this is tip content!"). Usefull for supplementary sentence.
+      }
+      */
+      @p(){
+	This is it! @notes(){ 2009 Michael Jackson. }
+      }
+      /* you can use '$notes' instead of '@notes' if inner content is text only.
+      @p(){
+	This is it! $notes("2009 Michael Jackson")
+      }
+      */
+    }
+  }
+}
+
+@scene({
+  season:"autumn"
+}){
+  @scene({
+    date:"10/15"
+  }){
+    @scene({
+      time: "16:00"
+    }){
+      @h2(){ Images }
+      $img("images/tb.png", 100, 100, "float end gap-start")
+      日本国民は、正当に選挙された国会における代表者を通じて行動し、われらとわれらの子孫のために、諸国民との協和による成果と、わが国全土にわたって自由のもたらす恵沢を確保し、政府の行為によつて再び戦争の惨禍が起ることのないようにする。
+      @figure(){
+	$img("images/tb.png", 200, 200)
+      }
+    }
+  }
+}
+
+@scene({
+  season:"winter"
+}){
+  @scene({
+    date:"1/10"
+  }){
+    @scene({
+      time: "22:00"
+    }){
+      @h2(){ TextEmphasis }
+      @p(){
+	日本語で$fdot("圏点")を打つ。
+	日本語で$odot("圏点")を打つ。
+	日本語で$ftriangle("圏点")を打つ。
+	日本語で$otriangle("圏点")を打つ。
+	日本語で$fsesame("圏点")を打つ。
+	日本語で$osesame("圏点")を打つ。
+      }
+    }
+  }
+}
+
+// You can hide constraint value to reader UI by using constraint value starting with '?'.
+@scene({
+  season:"?winter",
+  date:"?2/1",
+  time:"?8:00"
+}){
+  @h2(){ Not apply constraint value to UI }
+  You can hide constraint value to reader UI by using constraint value starting with '$tcy("?")'.
+}
+
+@div(){
+  @h2(){ Page-break }
+  Insert page break here.
+  $page-break()
+  head of next page.
+}
+
+@h2(){ Dropcaps }
+@dropcaps(){
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+}
+

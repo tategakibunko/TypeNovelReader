@@ -1,0 +1,143 @@
+<div class="ui basic top segment">
+  <div class="ui icon menu" *ngIf="compileResult">
+    <a class="item" (click)="onClickFontSmaller()" title="font smaller">
+      <i class="font small icon"></i>
+    </a>
+    <a class="item" (click)="onClickFontLarger()" title="font larger">
+      <i class="font icon"></i>
+    </a>
+    <a class="item" (click)="onClickReaderHeightLarger()" title="view area larger">
+      <i class="plus circle icon"></i>
+    </a>
+    <a class="item" (click)="onClickReaderHeightSmaller()" title="view area smaller">
+      <i class="minus circle icon"></i>
+    </a>
+    <a class="item" (click)="onClickToggleWritingMode()" title="vertical/horizontal">
+      <ng-container *ngIf="isVert; else toVert">
+        <i class="sort amount down icon"></i>
+      </ng-container>
+      <ng-template #toVert>
+        <i class="sort amount down rotated icon"></i>
+      </ng-template>
+    </a>
+    <a class="item" (click)="onClickInitializeConfig()" title="initialize setting">
+      <i class="eraser icon"></i>
+    </a>
+    <a class="item" (click)="onClickToggleSemanticInfoEnable()"
+      title="{{ enableSemanticUI? 'Hidden Semantic Info' : 'Show Semantic Info' }}">
+      <i *ngIf="enableSemanticUI; else visibleSemanticInfo" class="low vision icon"></i>
+      <ng-template #visibleSemanticInfo>
+        <i class="eye icon"></i>
+      </ng-template>
+    </a>
+    <a class="item" (click)="onClickRebuild()" title="Rebuild">
+      <i class="redo icon"></i>
+    </a>
+  </div>
+
+  <div class="authority">
+    <span class="novel-title">{{ title }}</span>
+    <span class="novel-author" *ngIf="author">
+      by
+      <img class="gravatar" [src]="gravatar" *ngIf="email">
+      <span class="author-name">
+        <a *ngIf="homepage; else nameOnly" target="_blank" rel="noopener" href="#" (click)="openHomepage()">
+          {{ author }}
+        </a>
+        <ng-template #nameOnly>
+          {{ author }}
+        </ng-template>
+      </span>
+    </span>
+  </div>
+
+  <div class="status">
+    <div class="status-content">
+      <div class="time-field">
+        <div class="date-text">
+          <i class="outline calendar alternate icon"></i>
+          {{ dateText }}
+        </div>
+        <img class="time" [src]="timeImageSrc">
+        <div class="time-text">
+          <i class="outline clock icon"></i>
+          {{ timeText }}
+        </div>
+      </div>
+      <div class="status-field">
+        <ng-container *ngIf="isBusy; else tocField">
+          <i *ngIf="isBusy" class="loading red asterisk icon"></i>
+          <span class="loading-text">{{status}}</span>
+        </ng-container>
+        <ng-template #tocField>
+          <div class="field toc-title" *ngIf="tocTitle">
+            <i class="cube icon"></i>{{ tocTitle }}
+          </div>
+        </ng-template>
+      </div>
+    </div>
+    <div class="season-line season-{{ season }}"></div>
+  </div>
+
+  <div id="screen" (drop)="onDrop($event)" (dragover)="onDragOver($event)">
+    <div class="ui icon message dd-message">
+      <i class="cloud upload icon"></i>
+      <div class="content">
+        <div class="header">
+          Drag and drop your file(
+          <span class="ui red label">*.tn</span>
+          <span class="ui red label">*.zip</span>
+          <span class="ui red label">*.html</span>
+          <span class="ui red label">*.md</span>
+          <span class="ui red label">*.txt</span>
+          ) here.
+        </div>
+        <p>File is compiled and page reader starts!</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="pager" *ngIf="reader">
+    <button class="ui button" (click)="setLeftPage()">
+      <i class="left arrow icon"></i>
+      Left
+    </button>
+    <span class="nombre">
+      <span class="cur-page">{{pageIndex + 1}}</span>
+      /
+      <span class="total-page">{{reader.pageCount}}</span>
+    </span>
+    <button class="ui button" (click)="setRightPage()">
+      Right
+      <i class="right arrow icon"></i>
+    </button>
+  </div>
+
+  <div class="slider" *ngIf="reader && isReaderComplete">
+    <mat-slider (change)="sliderChange($event)" [min]="0" [max]="reader.pageCount - 1" [step]="1" [value]="pageIndex"
+      [invert]="isRtlMode">
+    </mat-slider>
+  </div>
+
+  <div class="ui mini error message" *ngIf="compileErrors.length > 0">
+    <ul>
+      <li *ngFor="let error of compileErrors">{{error}}</li>
+    </ul>
+  </div>
+
+  <div class="ui small icon message">
+    <i class="keyboard outline icon"></i>
+    <div class="content">
+      <p><i class="left arrow icon"></i>: Move to <b>LEFT</b> page.</p>
+      <p><i class="right arrow icon"></i>: Move to <b>RIGHT</b> page.</p>
+      <p><span class="ui black inverted small label">J</span>: Move to <b>NEXT</b> page.</p>
+      <p><span class="ui black inverted small label">K</span>: Move to <b>PREV</b> page.</p>
+    </div>
+  </div>
+
+  <div class="ui dividing header" *ngIf="isTocEnable">
+    <i class="bookmark outline icon"></i>
+    Topic Of Contents
+  </div>
+  <div id="toc" [hidden]="!isTocEnable"></div>
+</div>

@@ -1,0 +1,11 @@
+:host ::ng-deep {
+  #toc a.active {
+    font-weight: bold;
+  }
+  .nehan-i-td.nehan-e-name img,
+  .nehan-e-speak a,
+  .nehan-e-tip,
+  .nehan-e-notes {
+    cursor: pointer;
+  }
+}

@@ -1,0 +1,11 @@
+<h1 class="ui header">{{ data.title }}</h1>
+<div class="image content">
+  <div *ngIf="data.image" class="ui medium image">
+    <img [src]="data.image">
+  </div>
+  <div id="content" class="description">
+    <ng-container *ngIf="data.content">
+      <p *ngFor="let line of lines">{{ line }}</p>
+    </ng-container>
+  </div>
+</div>

@@ -1,0 +1,30 @@
+.PHONY:examples
+
+all: examples ngbuild-prod ebuild epack
+
+examples:
+	cd examples && make
+
+ngbuild:
+	ng build --extraWebpackConfig webpack.extra.js
+
+ngbuild-prod:
+	ng build --prod --extraWebpackConfig webpack.extra.js
+
+ebuild:
+	tsc --p electron
+
+erun:
+	npx electron .
+
+epack: epack-mac epack-win epack-linux
+
+epack-win:
+	npx electron-builder --win
+
+epack-linux:
+	npx electron-builder --linux
+
+epack-mac:
+	npx electron-builder --mac
+

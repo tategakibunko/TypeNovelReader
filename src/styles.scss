@@ -1,0 +1,25 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+/*
+ * Copyright (C) 2015 licensed under the IPA Font License Agreement v1.0
+ * http://ipafont.ipa.go.jp/ipa_font_license_v1.html
+ */
+
+/* woff2 - not supported by IE, Edge */
+@font-face {
+  font-family:'ipaex-mincho';
+  font-style:normal;
+  font-weight:400;
+  src:url("./assets/fonts/ipaexm.woff") format('woff'),
+  url("./assets/fonts/ipaexm.ttf") format('truetype');
+}
+
+@font-face {
+  font-family:'ipa-mincho';
+  font-style:normal;
+  font-weight:400;
+  src:url("./assets/fonts/ipam.woff2") format('woff2'),
+  url("./assets/fonts/ipam.woff") format('woff'),
+  url("./assets/fonts/ipam.ttf") format('truetype');
+}

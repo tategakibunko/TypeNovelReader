@@ -1,0 +1,67 @@
+{
+  "productName": "TypeNovelReader",
+  "directories": {
+    "output": "release/"
+  },
+  "files": [
+    "**/*",
+    "!**/*.ts",
+    "!*.code-workspace",
+    "!LICENSE.md",
+    "!package.json",
+    "!package-lock.json",
+    "!.git/",
+    "!release/",
+    "!examples/",
+    "!docimages/",
+    "!tnc/",
+    "!semantic-ui/",
+    "!common/",
+    "!src/",
+    "!e2e/",
+    "!hooks/",
+    "!angular.json",
+    "!angular.json.orig",
+    "!electron-builder.json",
+    "!electron-builder.json.orig",
+    "!_config.yml",
+    "!karma.conf.js",
+    "!tsconfig.app.json",
+    "!tsconfig.json",
+    "!tsconfig.spec.json",
+    "!tslint.json",
+    "!webpack.extra.js",
+    "!Makefile",
+    "!README.md",
+    "!.DS_Store",
+    "!.editorconfig",
+    "!.gitignore"
+  ],
+  "win": {
+    "target": [
+      "portable"
+    ],
+    "extraResources": [
+      "tnc/win",
+      "tnc/config"
+    ]
+  },
+  "mac": {
+    "target": [
+      "dmg"
+    ],
+    "extraResources": [
+      "tnc/mac",
+      "tnc/config"
+    ]
+  },
+  "linux": {
+    "target": [
+      "AppImage"
+    ],
+    "extraResources": [
+      "tnc/linux",
+      "tnc/config"
+    ]
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "title": "SampleNovel",
+  "theme": "default",
+  "author": "tategakibunko",
+  "email": "lambda.watanabe@gmail.com",
+  "homepage": "https://tb.antiscroll.com",
+  "writingMode": "horizontal-tb",
+  "displayTypeNovelError": true,
+  "enableSemanticUI": true,
+  "speechAvatarSize": 50,
+  "characters": {
+    "hanako": {
+      "names": ["田中", "花子"],
+      "images": {
+        "normal": "images/avatar1.svg"
+      },
+      "description": "田中花子の詳細をここに書く"
+    },
+    "john": {
+      "names": ["John", "Adams"],
+      "images": {
+        "normal": "images/avatar2.svg"
+      },
+      "description": "Desription of John Adams"
+    }
+  }
+}
