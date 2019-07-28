@@ -47,6 +47,7 @@ Thumbs.db
 
 # electron-builder
 release/*.blockmap
+release/*.yml
 release/*.yaml
 release/mac
 release/win-unpacked
