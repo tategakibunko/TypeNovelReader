@@ -1,0 +1,25 @@
+.open-link{
+  cursor: pointer;
+}
+.bookmark {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.3rem;
+}
+.title{
+  flex: 5;
+  margin: 0 0.2rem;
+}
+.pos{
+  flex: 1;
+  text-align: center;
+  margin: 0 0.2rem;
+}
+.actions{
+  text-align: right;
+  flex: 3;
+  margin: 0 0.2rem;
+}
+.actions button {
+  margin-right: 0.5rem;
+}

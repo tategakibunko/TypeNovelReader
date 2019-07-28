@@ -97,12 +97,15 @@ export const InitialNovelData = {
 };
 
 export interface BookmarkData {
+  title: string;
   filepath: string;
   pageIndex: number;
+  pageCount: number;
 }
 
 export const BookmarkDataName = 'tnr-bookmark';
 
 export interface BookmarkDialogData {
-  newBookmark: BookmarkData;
+  newBookmark?: BookmarkData;
+  bookmarks: BookmarkData[];
 }

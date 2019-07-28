@@ -22,7 +22,6 @@ import {
   NovelData,
   InitialNovelData,
   BookmarkData,
-  BookmarkDataName,
   BookmarkDialogData,
 } from '../../common/models';
 import { InfoDialogComponent } from './info-dialog/info-dialog.component';
@@ -43,8 +42,9 @@ import { NovelDataService } from './novel-data.service';
 import { NehanOthersService } from './nehan-others.service';
 import { ipcRenderer } from 'electron';
 import { BookmarkDialogComponent } from './bookmark-dialog/bookmark-dialog.component';
+import { BookmarkService } from './bookmark.service';
 
-const InfoDialogWidth = 300;
+const DialogWidth = 500;
 const ResizeEventDelay = 500;
 const MinFontSize = 12;
 const MaxFontSize = 30;
@@ -77,6 +77,7 @@ export class AppComponent implements OnInit {
   public isFirstCompile = true;
   public lastFilePath: string | undefined = undefined;
   public lastSeekPos: number;
+  public startPageIndex: number;
   public compileResult: CompileResult | undefined;
   public reader: Nehan.PageReader;
   public pageIndex: number;
@@ -96,6 +97,7 @@ export class AppComponent implements OnInit {
     private dfont: DeviceFontService,
     private sdata: SemanticDataService,
     private ndata: NovelDataService,
+    private bookmark: BookmarkService,
     private nehanBody: NehanBodyService,
     private nehanRuby: NehanRubyService,
     private nehanSpeak: NehanSpeakService,
@@ -119,6 +121,7 @@ export class AppComponent implements OnInit {
     this.curToc = undefined;
     this.compileResult = undefined;
     this.lastSeekPos = 0;
+    this.startPageIndex = -1;
     this.$screen = this.el.nativeElement.querySelector('#screen');
     this.$toc = this.el.nativeElement.querySelector('#toc');
     fromEvent(window, 'resize').pipe(
@@ -173,6 +176,10 @@ export class AppComponent implements OnInit {
 
   get email(): string {
     return this.ndata.getEmail(this.novelData);
+  }
+
+  get pageCount(): number {
+    return this.reader ? this.reader.pageCount : 0;
   }
 
   get homepage(): string {
@@ -270,7 +277,7 @@ export class AppComponent implements OnInit {
 
   openInfoDialog(data: InfoDialogData) {
     this.isDialogOpen = true;
-    const dlgRef = this.dialog.open(InfoDialogComponent, { width: InfoDialogWidth + 'px', data });
+    const dlgRef = this.dialog.open(InfoDialogComponent, { width: DialogWidth + 'px', data });
     dlgRef.afterClosed().subscribe(() => {
       this.isDialogOpen = false;
     });
@@ -278,10 +285,21 @@ export class AppComponent implements OnInit {
 
   openBookmarkDialog(data: BookmarkDialogData) {
     this.isDialogOpen = true;
-    const dlgRef = this.dialog.open(BookmarkDialogComponent, { data });
-    dlgRef.afterClosed().subscribe(() => {
+    const dlgRef = this.dialog.open(BookmarkDialogComponent, { width: DialogWidth + 'px', data });
+    dlgRef.afterClosed().subscribe((bookmark: BookmarkData) => {
       this.isDialogOpen = false;
+      if (bookmark) {
+        this.openBookmark(bookmark);
+      }
     });
+  }
+
+  openBookmark(bookmark: BookmarkData) {
+    if (this.targetFilePath === bookmark.filepath) {
+      this.setPage(bookmark.pageIndex);
+      return;
+    }
+    this.openFile(bookmark.filepath, bookmark.pageIndex);
   }
 
   compileHTML(html: string): string {
@@ -429,7 +447,8 @@ export class AppComponent implements OnInit {
   }
 
   onProgressPage(reader: Nehan.PageReader, page: Nehan.LogicalPage) {
-    if (page.acmCharCount >= this.lastSeekPos && this.isBusy) {
+    if ((page.index === this.startPageIndex) ||
+      (page.acmCharCount >= this.lastSeekPos && this.isBusy)) {
       this.isBusy = false;
       this.setPage(page.index);
     }
@@ -547,7 +566,7 @@ export class AppComponent implements OnInit {
 
   setNextPage() {
     if (this.isDialogOpen) { return; }
-    const index = Math.min(this.pageIndex + 1, this.reader.pageCount - 1);
+    const index = Math.min(this.pageIndex + 1, this.pageCount - 1);
     if (index !== this.pageIndex) {
       this.setPage(index);
     }
@@ -617,12 +636,13 @@ export class AppComponent implements OnInit {
     this.cdr.markForCheck();
   }
 
-  openFile(filepath: string) {
+  openFile(filepath: string, startPageIndex?: number) {
     if (this.lastFilePath !== filepath) {
       this.isFirstCompile = true;
       this.lastSeekPos = 0;
     }
     this.lastFilePath = filepath;
+    this.startPageIndex = (startPageIndex !== undefined) ? startPageIndex : -1;
     if (this.$screen.firstChild) {
       this.$screen.firstChild.remove();
     }
@@ -691,11 +711,14 @@ export class AppComponent implements OnInit {
   }
 
   onClickBookmark() {
-    if (!this.compileResult) {
-      return;
-    }
-    const newBookmark: BookmarkData = { filepath: this.targetFilePath, pageIndex: this.pageIndex };
-    this.openBookmarkDialog({ newBookmark });
+    const newBookmark: BookmarkData = {
+      title: this.title,
+      filepath: this.targetFilePath,
+      pageIndex: this.pageIndex,
+      pageCount: this.pageCount,
+    };
+    const bookmarks = this.bookmark.loadBookmarks();
+    this.openBookmarkDialog({ newBookmark, bookmarks });
   }
 
   onDragOver(event: DragEvent) {

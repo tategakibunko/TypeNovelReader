@@ -1,1 +1,21 @@
-<p>bookmark-dialog works!</p>
+<h2 class="ui header">
+  <i class="bookmark icon"></i>
+  <div class="content">Bookmarks</div>
+</h2>
+
+<button mat-raised-button (click)="addBookmark()" *ngIf="data.newBookmark">Add current page</button>
+
+<div class="ui basic segment">
+  <div class="bookmark" *ngFor="let bookmark of data.bookmarks; let i = index">
+    <div class="title"><a class="open-link" (click)="openBookmark(bookmark)">{{bookmark.title}}</a></div>
+    <div class="pos">{{bookmark.pageIndex + 1}} / {{bookmark.pageCount}}</div>
+    <div class="actions">
+      <button *ngIf="data.newBookmark" class="ui icon button" (click)="overwriteBookmark(i)">
+        <i class="pencil alternate blue icon"></i>
+      </button>
+      <button class="ui icon button" (click)="deleteBookmark(bookmark)">
+        <i class="trash alternate red icon"></i>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,18 +1,18 @@
 <div class="ui basic top segment">
-  <div class="ui icon menu" *ngIf="compileResult">
-    <a class="item" (click)="onClickFontSmaller()" title="font smaller">
+  <div class="ui icon menu">
+    <a *ngIf="compileResult" class="item" (click)="onClickFontSmaller()" title="font smaller">
       <i class="font small icon"></i>
     </a>
-    <a class="item" (click)="onClickFontLarger()" title="font larger">
+    <a *ngIf="compileResult" class="item" (click)="onClickFontLarger()" title="font larger">
       <i class="font icon"></i>
     </a>
-    <a class="item" (click)="onClickReaderHeightLarger()" title="view area larger">
+    <a *ngIf="compileResult" class="item" (click)="onClickReaderHeightLarger()" title="view area larger">
       <i class="plus circle icon"></i>
     </a>
-    <a class="item" (click)="onClickReaderHeightSmaller()" title="view area smaller">
+    <a *ngIf="compileResult" class="item" (click)="onClickReaderHeightSmaller()" title="view area smaller">
       <i class="minus circle icon"></i>
     </a>
-    <a class="item" (click)="onClickToggleWritingMode()" title="vertical/horizontal">
+    <a *ngIf="compileResult" class="item" (click)="onClickToggleWritingMode()" title="vertical/horizontal">
       <ng-container *ngIf="isVert; else toVert">
         <i class="sort amount down icon"></i>
       </ng-container>
@@ -20,17 +20,17 @@
         <i class="sort amount down rotated icon"></i>
       </ng-template>
     </a>
-    <a class="item" (click)="onClickInitializeConfig()" title="initialize setting">
+    <a *ngIf="compileResult" class="item" (click)="onClickInitializeConfig()" title="initialize setting">
       <i class="eraser icon"></i>
     </a>
-    <a class="item" (click)="onClickToggleSemanticInfoEnable()"
+    <a *ngIf="compileResult" class="item" (click)="onClickToggleSemanticInfoEnable()"
       title="{{ enableSemanticUI? 'Hidden Semantic Info' : 'Show Semantic Info' }}">
       <i *ngIf="enableSemanticUI; else visibleSemanticInfo" class="low vision icon"></i>
       <ng-template #visibleSemanticInfo>
         <i class="eye icon"></i>
       </ng-template>
     </a>
-    <a class="item" (click)="onClickRebuild()" title="Rebuild">
+    <a *ngIf="compileResult" class="item" (click)="onClickRebuild()" title="Rebuild">
       <i class="redo icon"></i>
     </a>
     <a class="item" (click)="onClickBookmark()" title="Bookmark">
