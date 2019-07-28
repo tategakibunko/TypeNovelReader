@@ -6,6 +6,10 @@ Mark "*": bug fixed.
 Mark "!": change that can break compatibility with older version
 ===============================================================================
 
+version 1.0.1
+==========================
+o Modify title from 'no title' to <filename> if no title is set.
+
 version 1.0.0, 2019/07/28
 ==========================
 * Follow TypeNovel version 1.0.0(security fix).
