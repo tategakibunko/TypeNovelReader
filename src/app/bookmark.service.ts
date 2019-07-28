@@ -19,9 +19,13 @@ export class BookmarkService {
     );
   }
 
+  isIncluded(bookmarks: BookmarkData[], bookmark: BookmarkData): boolean {
+    return bookmarks.find((bmk: BookmarkData) => this.compare(bmk, bookmark)) ? true : false;
+  }
+
   saveBookmark(bookmark: BookmarkData): BookmarkData[] {
     const bookmarks: BookmarkData[] = this.loadBookmarks();
-    if (bookmarks.find((bmk: BookmarkData) => this.compare(bmk, bookmark))) {
+    if (this.isIncluded(bookmarks, bookmark)) {
       return bookmarks;
     }
     bookmarks.unshift(bookmark);

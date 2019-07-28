@@ -3,11 +3,11 @@
   <div class="content">Bookmarks</div>
 </h2>
 
-<button mat-raised-button (click)="addBookmark()" *ngIf="data.newBookmark">Add current page</button>
-
 <div class="ui basic segment">
   <div class="bookmark" *ngFor="let bookmark of data.bookmarks; let i = index">
-    <div class="title"><a class="open-link" (click)="openBookmark(bookmark)">{{bookmark.title}}</a></div>
+    <div class="title">
+      <a class="open-link" (click)="openBookmark(bookmark)" title="{{bookmark.filepath}}">{{bookmark.title}}</a>
+    </div>
     <div class="pos">{{bookmark.pageIndex + 1}} / {{bookmark.pageCount}}</div>
     <div class="actions">
       <button *ngIf="data.newBookmark" class="ui icon button" (click)="overwriteBookmark(i)">
@@ -19,3 +19,7 @@
     </div>
   </div>
 </div>
+
+<button class="ui labeled icon button" (click)="addBookmark()" *ngIf="data.newBookmark && !isAlreadyAdded">
+  <i class="paperclip icon"></i>Add current page
+</button>

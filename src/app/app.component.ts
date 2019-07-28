@@ -711,12 +711,12 @@ export class AppComponent implements OnInit {
   }
 
   onClickBookmark() {
-    const newBookmark: BookmarkData = {
+    const newBookmark: BookmarkData = this.compileResult ? {
       title: this.title,
       filepath: this.targetFilePath,
       pageIndex: this.pageIndex,
       pageCount: this.pageCount,
-    };
+    } : undefined;
     const bookmarks = this.bookmark.loadBookmarks();
     this.openBookmarkDialog({ newBookmark, bookmarks });
   }

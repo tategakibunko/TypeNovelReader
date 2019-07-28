@@ -18,7 +18,18 @@ export class BookmarkDialogComponent implements OnInit {
   ngOnInit() {
   }
 
+  get isAlreadyAdded(): boolean {
+    if (!this.data.newBookmark) {
+      return false;
+    }
+    return this.bookmark.isIncluded(this.data.bookmarks, this.data.newBookmark);
+  }
+
   addBookmark() {
+    if (this.isAlreadyAdded) {
+      alert('Already added!');
+      return;
+    }
     this.data.bookmarks = this.bookmark.saveBookmark(this.data.newBookmark);
   }
 
@@ -27,7 +38,9 @@ export class BookmarkDialogComponent implements OnInit {
   }
 
   overwriteBookmark(index: number) {
-    this.data.bookmarks = this.bookmark.updateBookmark(this.data.newBookmark, index);
+    if (confirm('Overwrite bookmark OK?')) {
+      this.data.bookmarks = this.bookmark.updateBookmark(this.data.newBookmark, index);
+    }
   }
 
   openBookmark(bookmark: BookmarkData) {
