@@ -33,6 +33,7 @@ import { NehanNotesService } from './nehan-notes.service';
 import { NehanImgService } from './nehan-img.service';
 import { NehanHeaderService } from './nehan-header.service';
 import { NehanBodyService } from './nehan-body.service';
+import { NehanRubyService } from './nehan-ruby.service';
 import { NehanSpeechBubbleService } from './nehan-speech-bubble.service';
 import { NehanSbTableService } from './nehan-sb-table.service';
 import { NovelDataService } from './novel-data.service';
@@ -92,6 +93,7 @@ export class AppComponent implements OnInit {
     private sdata: SemanticDataService,
     private ndata: NovelDataService,
     private nehanBody: NehanBodyService,
+    private nehanRuby: NehanRubyService,
     private nehanSpeak: NehanSpeakService,
     private nehanScene: NehanSceneService,
     private nehanTip: NehanTipService,
@@ -266,6 +268,8 @@ export class AppComponent implements OnInit {
   }
 
   compileHTML(html: string): string {
+    html = this.nehanRuby.preCompile(html);
+    html = this.nehanSpeechBubble.preCompile(html);
     html = this.nehanTip.preCompile(html);
     html = this.nehanNotes.preCompile(html);
     return html;
