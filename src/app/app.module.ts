@@ -9,6 +9,7 @@ import { MatSliderModule } from '@angular/material/slider';
 import { InfoDialogComponent } from './info-dialog/info-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
+import { BookmarkDialogComponent } from './bookmark-dialog/bookmark-dialog.component';
 // import { MatDividerModule } from '@angular/material/divider';
 // import { MatIconModule } from '@angular/material/icon';
 // import { MatRadioModule } from '@angular/material/radio';
@@ -25,6 +26,7 @@ const matModules = [
   declarations: [
     AppComponent,
     InfoDialogComponent,
+    BookmarkDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -34,6 +36,7 @@ const matModules = [
   ],
   entryComponents: [
     InfoDialogComponent,
+    BookmarkDialogComponent,
   ],
   providers: [],
   bootstrap: [AppComponent]
