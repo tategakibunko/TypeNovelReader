@@ -102,3 +102,7 @@ export interface BookmarkData {
 }
 
 export const BookmarkDataName = 'tnr-bookmark';
+
+export interface BookmarkDialogData {
+  newBookmark: BookmarkData;
+}

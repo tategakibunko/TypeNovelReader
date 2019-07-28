@@ -23,6 +23,7 @@ import {
   InitialNovelData,
   BookmarkData,
   BookmarkDataName,
+  BookmarkDialogData,
 } from '../../common/models';
 import { InfoDialogComponent } from './info-dialog/info-dialog.component';
 import { DeviceFontService } from './device-font.service';
@@ -41,6 +42,7 @@ import { NehanSbTableService } from './nehan-sb-table.service';
 import { NovelDataService } from './novel-data.service';
 import { NehanOthersService } from './nehan-others.service';
 import { ipcRenderer } from 'electron';
+import { BookmarkDialogComponent } from './bookmark-dialog/bookmark-dialog.component';
 
 const InfoDialogWidth = 300;
 const ResizeEventDelay = 500;
@@ -152,27 +154,6 @@ export class AppComponent implements OnInit {
     }
     this.saveConfig(config);
     return config;
-  }
-
-  saveBookmark(filepath: string, pageIndex: number) {
-    const bookmarks: BookmarkData[] = this.loadBookmarks();
-    if (bookmarks.find((bookmark: BookmarkData) => {
-      return bookmark.filepath === filepath && bookmark.pageIndex === pageIndex;
-    })) {
-      return;
-    }
-    bookmarks.unshift({ filepath, pageIndex });
-    localStorage.setItem(BookmarkDataName, JSON.stringify(bookmarks));
-  }
-
-  loadBookmarks() {
-    let bookmarks: BookmarkData[] = [];
-    const data = localStorage.getItem(BookmarkDataName);
-    try {
-      bookmarks = JSON.parse(data);
-    } catch (error) {
-    }
-    return bookmarks;
   }
 
   get novelData(): NovelData {
@@ -290,6 +271,14 @@ export class AppComponent implements OnInit {
   openInfoDialog(data: InfoDialogData) {
     this.isDialogOpen = true;
     const dlgRef = this.dialog.open(InfoDialogComponent, { width: InfoDialogWidth + 'px', data });
+    dlgRef.afterClosed().subscribe(() => {
+      this.isDialogOpen = false;
+    });
+  }
+
+  openBookmarkDialog(data: BookmarkDialogData) {
+    this.isDialogOpen = true;
+    const dlgRef = this.dialog.open(BookmarkDialogComponent, { data });
     dlgRef.afterClosed().subscribe(() => {
       this.isDialogOpen = false;
     });
@@ -705,8 +694,8 @@ export class AppComponent implements OnInit {
     if (!this.compileResult) {
       return;
     }
-    console.log('bookmark: file = %s, pos = %d', this.targetFilePath, this.pageIndex);
-    this.saveBookmark(this.targetFilePath, this.pageIndex);
+    const newBookmark: BookmarkData = { filepath: this.targetFilePath, pageIndex: this.pageIndex };
+    this.openBookmarkDialog({ newBookmark });
   }
 
   onDragOver(event: DragEvent) {
