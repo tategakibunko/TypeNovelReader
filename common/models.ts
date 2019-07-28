@@ -96,4 +96,9 @@ export const InitialNovelData = {
   characters: {},
 };
 
+export interface BookmarkData {
+  filepath: string;
+  pageIndex: number;
+}
 
+export const BookmarkDataName = 'tnr-bookmark';

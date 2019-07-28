@@ -21,6 +21,8 @@ import {
   ReaderWritingMode,
   NovelData,
   InitialNovelData,
+  BookmarkData,
+  BookmarkDataName,
 } from '../../common/models';
 import { InfoDialogComponent } from './info-dialog/info-dialog.component';
 import { DeviceFontService } from './device-font.service';
@@ -152,6 +154,27 @@ export class AppComponent implements OnInit {
     return config;
   }
 
+  saveBookmark(filepath: string, pageIndex: number) {
+    const bookmarks: BookmarkData[] = this.loadBookmarks();
+    if (bookmarks.find((bookmark: BookmarkData) => {
+      return bookmark.filepath === filepath && bookmark.pageIndex === pageIndex;
+    })) {
+      return;
+    }
+    bookmarks.unshift({ filepath, pageIndex });
+    localStorage.setItem(BookmarkDataName, JSON.stringify(bookmarks));
+  }
+
+  loadBookmarks() {
+    let bookmarks: BookmarkData[] = [];
+    const data = localStorage.getItem(BookmarkDataName);
+    try {
+      bookmarks = JSON.parse(data);
+    } catch (error) {
+    }
+    return bookmarks;
+  }
+
   get novelData(): NovelData {
     if (!this.compileResult) {
       return { ...InitialNovelData };
@@ -179,11 +202,12 @@ export class AppComponent implements OnInit {
     return this.ndata.getGravagar(this.novelData);
   }
 
+  get targetFilePath(): string {
+    return this.compileResult ? this.compileResult.env.targetFilePath : '';
+  }
+
   get targetFileName(): string {
-    if (!this.compileResult) {
-      return '';
-    }
-    const parts = this.compileResult.env.targetFilePath.split('/');
+    const parts = this.targetFilePath.split('/');
     return parts[parts.length - 1] || 'TOC undefined';
   }
 
@@ -675,6 +699,14 @@ export class AppComponent implements OnInit {
 
   onClickRebuild() {
     this.compileFile(this.compileTargetFilePath);
+  }
+
+  onClickBookmark() {
+    if (!this.compileResult) {
+      return;
+    }
+    console.log('bookmark: file = %s, pos = %d', this.targetFilePath, this.pageIndex);
+    this.saveBookmark(this.targetFilePath, this.pageIndex);
   }
 
   onDragOver(event: DragEvent) {
