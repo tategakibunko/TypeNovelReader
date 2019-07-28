@@ -86,7 +86,7 @@ export interface NovelData {
 }
 
 export const InitialNovelData = {
-  title: 'No title',
+  title: '',
   theme: 'default',
   author: '',
   email: 'unknown',

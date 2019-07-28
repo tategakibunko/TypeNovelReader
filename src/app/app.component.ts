@@ -167,7 +167,7 @@ export class AppComponent implements OnInit {
   }
 
   get title(): string {
-    return this.ndata.getTitle(this.novelData);
+    return this.ndata.getTitle(this.novelData) || this.targetFileName;
   }
 
   get author(): string {
