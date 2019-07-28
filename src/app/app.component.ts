@@ -185,6 +185,10 @@ export class AppComponent implements OnInit {
 
   get tocTitle(): string {
     if (!this.curToc) {
+      if (this.compileResult) {
+        const parts = this.compileResult.env.targetFilePath.split('/');
+        return parts[parts.length - 1] || 'TOC undefined';
+      }
       return 'TOC undefined';
     }
     return this.curToc.a.innerText;
