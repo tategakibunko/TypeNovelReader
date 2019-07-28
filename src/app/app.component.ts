@@ -65,19 +65,19 @@ export class AppComponent implements OnInit {
   public $screen: HTMLElement;
   public $toc: HTMLElement;
   public isBusy = false;
+  public isDialogOpen = false;
+  public isReaderComplete = false;
+  public enableSemanticUI = true;
+  public displayTypeNovelError = true;
   public status = 'Drag and drop TypeNovel';
   public isFirstCompile = true;
   public lastFilePath: string | undefined = undefined;
   public lastSeekPos: number;
-  public isReaderComplete: boolean;
   public compileResult: CompileResult | undefined;
   public reader: Nehan.PageReader;
   public pageIndex: number;
   public tocLinks: TocLink[] = [];
   public config: ReaderConfig = { ...InitialConfig };
-  public isDialogOpen: boolean;
-  public enableSemanticUI: boolean;
-  public displayTypeNovelError: boolean;
   public curScene: SemanticScene;
   public curToc: TocLink | undefined;
 
@@ -114,11 +114,7 @@ export class AppComponent implements OnInit {
     };
     this.curToc = undefined;
     this.compileResult = undefined;
-    this.isDialogOpen = false;
-    this.enableSemanticUI = true;
-    this.displayTypeNovelError = true;
     this.lastSeekPos = 0;
-    this.isReaderComplete = false;
     this.$screen = this.el.nativeElement.querySelector('#screen');
     this.$toc = this.el.nativeElement.querySelector('#toc');
     fromEvent(window, 'resize').pipe(
@@ -516,7 +512,7 @@ export class AppComponent implements OnInit {
 
   setPage(index: number) {
     if (this.isDialogOpen || this.isBusy) { return; }
-    const page = this.reader.getPage(index);
+    const page: Nehan.LogicalPage = this.reader.getPage(index);
     this.pageIndex = index;
     if (this.$screen.firstChild) {
       this.$screen.replaceChild(page.dom, this.$screen.firstChild);
