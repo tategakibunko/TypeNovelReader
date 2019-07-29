@@ -54,6 +54,11 @@ export interface CharaData {
   description: string;
 }
 
+export interface Character {
+  charaKey: string;
+  charaData: CharaData;
+}
+
 export interface InfoDialogData {
   title: string;
   content?: string;

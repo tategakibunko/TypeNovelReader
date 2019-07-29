@@ -1,0 +1,18 @@
+<h2 class="ui header">
+  <i class="users icon"></i>
+  <div class="content">Characters</div>
+</h2>
+
+<div class="ui divided items">
+  <div class="item" *ngFor="let chara of data.characters">
+    <div class="ui tiny image">
+      <img *ngIf="charaImage(chara.charaData)" [src]="charaImage(chara.charaData)">
+    </div>
+    <div class="content">
+      <a class="header">{{ chara.charaData.names.join(' ') }}</a>
+      <div class="description">
+        <p>{{ chara.charaData.description }}</p>
+      </div>
+    </div>
+  </div>
+</div>

@@ -43,6 +43,7 @@ import { NehanOthersService } from './nehan-others.service';
 import { ipcRenderer } from 'electron';
 import { BookmarkDialogComponent } from './bookmark-dialog/bookmark-dialog.component';
 import { BookmarkService } from './bookmark.service';
+import { CharactersDialogComponent } from './characters-dialog/characters-dialog.component';
 
 const DialogWidth = 500;
 const ResizeEventDelay = 500;
@@ -273,6 +274,10 @@ export class AppComponent implements OnInit {
     return tocBody.childElementCount > 0;
   }
 
+  get characterCount(): number {
+    return this.ndata.getCharacterCount(this.novelData);
+  }
+
   openHomepage() {
     remote.shell.openExternalSync(this.homepage);
   }
@@ -280,6 +285,18 @@ export class AppComponent implements OnInit {
   openInfoDialog(data: InfoDialogData) {
     this.isDialogOpen = true;
     const dlgRef = this.dialog.open(InfoDialogComponent, { width: DialogWidth + 'px', data });
+    dlgRef.afterClosed().subscribe(() => {
+      this.isDialogOpen = false;
+    });
+  }
+
+  openCharactersDialog() {
+    this.isDialogOpen = true;
+    const data = {
+      characters: this.ndata.getCharacterArray(this.novelData),
+      baseImgPath: this.compileResult.env.resourcePath
+    };
+    const dlgRef = this.dialog.open(CharactersDialogComponent, { width: DialogWidth + 'px', data });
     dlgRef.afterClosed().subscribe(() => {
       this.isDialogOpen = false;
     });
@@ -706,6 +723,13 @@ export class AppComponent implements OnInit {
   onClickToggleWritingMode() {
     this.config.writingMode = this.isRtlMode ? 'horizontal-tb' : 'vertical-rl';
     this.updateReader();
+  }
+
+  onClickShowCharacters() {
+    if (this.characterCount === 0) {
+      return;
+    }
+    this.openCharactersDialog();
   }
 
   onClickInitializeConfig() {

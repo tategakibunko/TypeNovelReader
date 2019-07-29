@@ -20,9 +20,12 @@
         <i class="sort amount down rotated icon"></i>
       </ng-template>
     </a>
-
     <a *ngIf="compileResult" class="item" (click)="onClickInitializeConfig()" title="initialize setting">
       <i class="eraser icon"></i>
+    </a>
+    <a *ngIf="compileResult && characterCount > 0" class="item" (click)="onClickShowCharacters()"
+      title="show characters">
+      <i class="users icon"></i>
     </a>
     <a *ngIf="compileResult" class="item" (click)="onClickToggleSemanticInfoEnable()"
       title="{{ enableSemanticUI? 'Hidden Semantic Info' : 'Show Semantic Info' }}">

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import * as md5 from 'md5';
 import {
   CharaData,
+  Character,
   ReaderWritingMode,
   NovelData,
   InitialNovelData,
@@ -62,6 +63,19 @@ export class NovelDataService {
     return data.speechAvatarSize || this.defaultSpeechAvatarSize;
   }
 
+  getCharacterCount(data: NovelData): number {
+    const characters = data.characters || {};
+    return Object.keys(characters).length;
+  }
+
+  getCharacterArray(data: NovelData): Character[] {
+    const characters = data.characters || {};
+    const charaKeys = Object.keys(characters);
+    return charaKeys.map(charaKey => {
+      return { charaKey, charaData: characters[charaKey] };
+    });
+  }
+
   getCharacterName(data: NovelData, charaKey: string): string {
     const chara = this.findChara(data, charaKey);
     return (chara && chara.names) ? chara.names.join(' ') : charaKey;
@@ -82,7 +96,7 @@ export class NovelDataService {
 
   getFirstCharacterImageSrc(data: NovelData, charaKey: string): string {
     const chara = this.findChara(data, charaKey);
-    if (!chara || !chara.images || !chara.images) {
+    if (!chara || !chara.images) {
       return '';
     }
     const imageKey = Object.keys(chara.images)[0];

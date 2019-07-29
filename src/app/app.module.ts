@@ -10,6 +10,7 @@ import { InfoDialogComponent } from './info-dialog/info-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { BookmarkDialogComponent } from './bookmark-dialog/bookmark-dialog.component';
+import { CharactersDialogComponent } from './characters-dialog/characters-dialog.component';
 // import { MatDividerModule } from '@angular/material/divider';
 // import { MatIconModule } from '@angular/material/icon';
 // import { MatRadioModule } from '@angular/material/radio';
@@ -27,6 +28,7 @@ const matModules = [
     AppComponent,
     InfoDialogComponent,
     BookmarkDialogComponent,
+    CharactersDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,6 +39,7 @@ const matModules = [
   entryComponents: [
     InfoDialogComponent,
     BookmarkDialogComponent,
+    CharactersDialogComponent,
   ],
   providers: [],
   bootstrap: [AppComponent]
