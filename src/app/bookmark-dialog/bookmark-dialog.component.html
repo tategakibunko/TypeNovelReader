@@ -11,7 +11,7 @@
     <div class="pos">{{bookmark.pageIndex + 1}} / {{bookmark.pageCount}}</div>
     <div class="actions">
       <button *ngIf="data.newBookmark" class="ui icon button" (click)="overwriteBookmark(i)">
-        <i class="pencil alternate blue icon"></i>
+        <i class="save outline blue icon"></i>
       </button>
       <button class="ui icon button" (click)="deleteBookmark(bookmark)">
         <i class="trash alternate red icon"></i>

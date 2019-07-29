@@ -1,3 +1,6 @@
+.menu .item.active{
+  font-weight: bold;
+}
 :host ::ng-deep {
   #toc a.active {
     font-weight: bold;

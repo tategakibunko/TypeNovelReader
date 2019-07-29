@@ -20,6 +20,7 @@
         <i class="sort amount down rotated icon"></i>
       </ng-template>
     </a>
+
     <a *ngIf="compileResult" class="item" (click)="onClickInitializeConfig()" title="initialize setting">
       <i class="eraser icon"></i>
     </a>
@@ -36,6 +37,22 @@
     <a class="item" (click)="onClickBookmark()" title="Bookmark">
       <i class="bookmark icon"></i>
     </a>
+
+    <div class="ui simple dropdown item">
+      Encoding
+      <i class="dropdown icon"></i>
+      <div class="menu">
+        <div class="item" [class.active]="textEncoding === 'UTF-8'" (click)="onSelectEncoding('UTF-8')">
+          UTF-8
+        </div>
+        <div class="item" [class.active]="textEncoding === 'SHIFT_JIS'" (click)="onSelectEncoding('SHIFT_JIS')">
+          SHIFT_JIS
+        </div>
+        <div class="item" [class.active]="textEncoding === 'EUC-JP'" (click)="onSelectEncoding('EUC-JP')">
+          EUC-JP
+        </div>
+      </div>
+    </div>
   </div>
 
   <div class="authority">

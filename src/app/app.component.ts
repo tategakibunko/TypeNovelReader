@@ -671,6 +671,16 @@ export class AppComponent implements OnInit {
     this.updateReader();
   }
 
+  onSelectEncoding(textEncoding: string) {
+    if (this.textEncoding === textEncoding) {
+      return;
+    }
+    this.textEncoding = textEncoding;
+    if (this.compileResult) {
+      this.compileFile(this.compileTargetFilePath);
+    }
+  }
+
   onClickFontLarger() {
     this.config.fontSize = Math.min(this.config.fontSize + FontDelta, MaxFontSize);
     this.updateReader();
