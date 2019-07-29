@@ -16,6 +16,10 @@ export class CharactersDialogComponent implements OnInit {
   ngOnInit() {
   }
 
+  charaName(charaData: CharaData): string {
+    return charaData.names.join(' ') || 'No name';
+  }
+
   charaImage(charaData: CharaData): string {
     if (!charaData.images) {
       return '';
@@ -27,5 +31,9 @@ export class CharactersDialogComponent implements OnInit {
     }
     const firstKey = imageKeys[0];
     return path.join(this.data.baseImgPath, images[firstKey]);
+  }
+
+  charaDescription(charaData: CharaData): string {
+    return charaData.description || 'No description';
   }
 }
