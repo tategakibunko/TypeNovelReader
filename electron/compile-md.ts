@@ -5,7 +5,7 @@ import { CompileEnv, CompileResult } from '../common/models';
 import { loadNovelData } from './compile-env';
 
 export function compileMarkdown(win: BrowserWindow, env: CompileEnv) {
-  const text = fs.readFileSync(env.targetFilePath, { encoding: 'UTF-8' });
+  const text = fs.readFileSync(env.targetFilePath, { encoding: env.textEncoding });
   const html = marked(text);
   const errors = [];
   const data = loadNovelData(env);

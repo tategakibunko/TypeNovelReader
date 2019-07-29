@@ -4,7 +4,7 @@ import { CompileEnv, CompileResult } from '../common/models';
 import { loadNovelData } from './compile-env';
 
 export function compileText(win: BrowserWindow, env: CompileEnv) {
-  const text = fs.readFileSync(env.targetFilePath, { encoding: 'UTF-8' });
+  const text = fs.readFileSync(env.targetFilePath, { encoding: env.textEncoding });
   const html = text.replace(/\n/g, '<br>');
   const errors = [];
   const data = loadNovelData(env);

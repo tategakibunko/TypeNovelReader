@@ -8,10 +8,11 @@ import { compileTypeNovel } from './compile-tn';
 import { compileError } from './compile-error';
 import { compileZip } from './compile-zip';
 
-export function compile(win: BrowserWindow, env: CompileEnv, filepath: string) {
+export function compile(win: BrowserWindow, env: CompileEnv, filepath: string, textEncoding: string) {
   env.targetFilePath = filepath;
   env.configFilePath = path.join(env.userDataPath, TnConfigFileName);
   env.resourcePath = path.dirname(filepath);
+  env.textEncoding = textEncoding;
 
   if (/\.txt$/i.test(filepath)) {
     compileText(win, env);

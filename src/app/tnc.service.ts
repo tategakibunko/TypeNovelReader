@@ -8,12 +8,12 @@ import { CompileResult } from '../../common/models';
 export class TncService {
   constructor() { }
 
-  compile(filepath: string): Promise<CompileResult> {
+  compile(filepath: string, textEncoding: string): Promise<CompileResult> {
     return new Promise<CompileResult>((resolve, _) => {
       ipcRenderer.once('compileResponse', (event, data: CompileResult) => {
         resolve(data);
       });
-      ipcRenderer.send('compile', filepath);
+      ipcRenderer.send('compile', { filepath, textEncoding });
     });
   }
 }

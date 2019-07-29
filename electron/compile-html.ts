@@ -4,7 +4,7 @@ import { NovelData, CompileEnv, CompileResult, InitialNovelData } from '../commo
 import { loadNovelData } from './compile-env';
 
 export function compileHTML(win: BrowserWindow, env: CompileEnv) {
-  const html = fs.readFileSync(env.targetFilePath, { encoding: 'UTF-8' });
+  const html = fs.readFileSync(env.targetFilePath, { encoding: env.textEncoding });
   const errors = [];
   const data: NovelData = loadNovelData(env);
   const result: CompileResult = { env, html, errors, data };

@@ -115,16 +115,16 @@ app.on('activate', () => {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
-ipcMain.on('compile', (event, filepath) => {
+ipcMain.on('compile', (event, args) => {
   win.focus();
-  compile(win, winEnv, filepath);
+  compile(win, winEnv, args.filepath, args.textEncoding);
 });
 
 // open by TypeNovelReader from right context menu in Windows.
 ipcMain.on('get-file-data', (event) => {
   if (process.platform === 'win32' && process.argv.length >= 2) {
     const filepath = process.argv[1];
-    compile(win, winEnv, filepath);
+    compile(win, winEnv, filepath, 'UTF-8');
   }
 });
 

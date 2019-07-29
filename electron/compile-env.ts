@@ -11,7 +11,8 @@ export function loadNovelData(env: CompileEnv): NovelData {
   let data: NovelData = { ...InitialNovelData };
   if (isFileExists(resDataFilePath)) {
     try {
-      data = JSON.parse(fs.readFileSync(resDataFilePath).toString('utf8'));
+      // data = JSON.parse(fs.readFileSync(resDataFilePath).toString('utf8'));
+      data = JSON.parse(fs.readFileSync(resDataFilePath).toString(env.textEncoding));
       env.dataFilePath = resDataFilePath;
     } catch (err) {
       dialog.showErrorBox('json error', err);

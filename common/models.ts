@@ -23,6 +23,7 @@ export interface CompileEnv {
   dataFilePath: string;
   tempPath: string; // for zipped target
   tncPath: string; // compiler path
+  textEncoding: string;
 }
 
 export const TnConfigFileName = 'tnconfig.json';
@@ -37,6 +38,7 @@ export const InitialCompileEnv: CompileEnv = {
   dataFilePath: '',
   tempPath: '',
   tncPath: '',
+  textEncoding: 'UTF-8',
 };
 
 export interface CompileResult {
@@ -101,6 +103,7 @@ export interface BookmarkData {
   filepath: string;
   pageIndex: number;
   pageCount: number;
+  textEncoding: string;
 }
 
 export const BookmarkDataName = 'tnr-bookmark';

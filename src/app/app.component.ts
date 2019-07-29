@@ -59,6 +59,7 @@ const InitialConfig = {
   writingMode: ('vertical-rl' as ReaderWritingMode),
   readerHeight: 450
 };
+const DefaultEncoding = 'UTF-8';
 
 @Component({
   selector: 'app-root',
@@ -85,6 +86,7 @@ export class AppComponent implements OnInit {
   public config: ReaderConfig = { ...InitialConfig };
   public curScene: SemanticScene;
   public curToc: TocLink | undefined;
+  public textEncoding = DefaultEncoding;
 
   constructor(
     @Inject(DOCUMENT) private document: Document,
@@ -299,6 +301,7 @@ export class AppComponent implements OnInit {
       this.setPage(bookmark.pageIndex);
       return;
     }
+    this.textEncoding = bookmark.textEncoding || DefaultEncoding;
     this.openFile(bookmark.filepath, bookmark.pageIndex);
   }
 
@@ -653,7 +656,7 @@ export class AppComponent implements OnInit {
     this.status = 'Compiling...';
     this.isBusy = true;
     this.isReaderComplete = false;
-    this.tnc.compile(filepath).then((result: CompileResult) => {
+    this.tnc.compile(filepath, this.textEncoding).then((result: CompileResult) => {
       this.onCompileDone(result);
     });
   }
@@ -716,6 +719,7 @@ export class AppComponent implements OnInit {
       filepath: this.targetFilePath,
       pageIndex: this.pageIndex,
       pageCount: this.pageCount,
+      textEncoding: this.textEncoding,
     } : undefined;
     const bookmarks = this.bookmark.loadBookmarks();
     this.openBookmarkDialog({ newBookmark, bookmarks });
