@@ -45,6 +45,8 @@ TypeNovelを[SemanticNovel](https://github.com/tategakibunko/SemanticNovel)の�
 以下のコマンドで、`release`ディレクトリ以下に実行ファイルが生成されます。
 
 ```bash
+npm install
+make -f Makefile.public all
 make -f Makefile.public all
 ```
 

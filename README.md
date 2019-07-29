@@ -45,7 +45,9 @@ For other functions, please run the [examples](/examples) and check it.
 Artifacts are generated under the `release/` directory by the following command.
 
 ```bash
+npm install
 make -f Makefile.public all
+make -f Makefile.public epack
 ```
 
 ## How to use
