@@ -8,6 +8,7 @@ Mark "!": change that can break compatibility with older version
 
 version 1.0.1
 ==========================
+o Supports switching text-encoding(sjis, eucjp, utf8).
 o Modify title from 'no title' to <filename> if no title is set.
 
 version 1.0.0, 2019/07/28
