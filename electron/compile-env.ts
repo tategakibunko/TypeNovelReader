@@ -1,8 +1,19 @@
 import { dialog } from 'electron';
 import * as fs from 'fs';
 import * as path from 'path';
+import * as Encoding from 'encoding-japanese';
 import { NovelData, CompileEnv, InitialNovelData, NovelDataFileName } from '../common/models';
 import { isFileExists } from './main-utils';
+
+export function loadText(filepath: string, encoding: string): string {
+  switch (encoding) {
+    case 'SHIFT_JIS':
+      return Encoding.convert(fs.readFileSync(filepath), { from: 'SJIS', to: 'UNICODE', type: 'string' });
+    case 'EUC-JP':
+      return Encoding.convert(fs.readFileSync(filepath), { from: 'EUCJP', to: 'UNICODE', type: 'string' });
+  }
+  return fs.readFileSync(filepath, { encoding });
+}
 
 // 1. set env.dataFilePath if loaded data exists.
 // 2. return NovelData (default data or loaded data).

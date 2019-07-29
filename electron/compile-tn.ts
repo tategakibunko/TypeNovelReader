@@ -5,6 +5,8 @@ import { CompileEnv, CompileResult, TnConfigFileName } from '../common/models';
 import { isFileExists } from './main-utils';
 import { loadNovelData } from './compile-env';
 
+// Note that TypeNovel only accepts utf-8 for now(v.1.0.0).
+// So env.textEncoding must be always 'UTF-8'.
 export function compileTypeNovel(win: BrowserWindow, env: CompileEnv) {
   const resConfigFilePath = path.join(env.resourcePath, TnConfigFileName);
   if (isFileExists(resConfigFilePath)) {
