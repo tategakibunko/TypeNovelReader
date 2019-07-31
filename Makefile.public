@@ -1,6 +1,6 @@
 .PHONY:examples
 
-all: examples ngbuild-prod ebuild epack
+all: ngbuild-prod ebuild epack
 
 examples:
 	cd examples && make
