@@ -484,8 +484,6 @@ export class AppComponent implements OnInit {
   onProgressPage(reader: Nehan.PageReader, page: Nehan.LogicalPage) {
     if ((page.index === this.startPageIndex) ||
       (this.lastSeekPos > 0 && page.acmCharCount >= this.lastSeekPos && this.isBusy)) {
-      console.log('setBusy = false, startPageIndex = %d, lastSeekPos = %d',
-        this.startPageIndex, this.lastSeekPos);
       this.setBusy(false, '');
       this.setPage(page.index);
     }
