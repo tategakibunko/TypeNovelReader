@@ -9,6 +9,8 @@ import { MatSliderModule } from '@angular/material/slider';
 import { InfoDialogComponent } from './info-dialog/info-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
+import { MatProgressSpinnerModule, MatSpinner } from '@angular/material/progress-spinner';
+import { OverlayModule } from '@angular/cdk/overlay';
 import { BookmarkDialogComponent } from './bookmark-dialog/bookmark-dialog.component';
 import { CharactersDialogComponent } from './characters-dialog/characters-dialog.component';
 // import { MatDividerModule } from '@angular/material/divider';
@@ -21,6 +23,7 @@ const matModules = [
   MatSliderModule,
   MatDialogModule,
   MatButtonModule,
+  MatProgressSpinnerModule,
 ];
 
 @NgModule({
@@ -34,9 +37,11 @@ const matModules = [
     BrowserModule,
     BrowserAnimationsModule,
     HotkeyModule.forRoot(),
+    OverlayModule,
     ...matModules,
   ],
   entryComponents: [
+    MatSpinner,
     InfoDialogComponent,
     BookmarkDialogComponent,
     CharactersDialogComponent,

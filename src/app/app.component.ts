@@ -44,6 +44,10 @@ import { ipcRenderer } from 'electron';
 import { BookmarkDialogComponent } from './bookmark-dialog/bookmark-dialog.component';
 import { BookmarkService } from './bookmark.service';
 import { CharactersDialogComponent } from './characters-dialog/characters-dialog.component';
+import { OverlayModule } from '@angular/cdk/overlay';
+import { ComponentPortal } from '@angular/cdk/portal';
+import { Overlay, OverlayRef } from '@angular/cdk/overlay';
+import { MatSpinner } from '@angular/material/progress-spinner';
 
 const DialogWidth = 500;
 const ResizeEventDelay = 500;
@@ -88,10 +92,12 @@ export class AppComponent implements OnInit {
   public curScene: SemanticScene;
   public curToc: TocLink | undefined;
   public textEncoding = DefaultEncoding;
+  public spinner: OverlayRef;
 
   constructor(
     @Inject(DOCUMENT) private document: Document,
     private zone: NgZone,
+    private overlay: Overlay,
     private tnc: TncService,
     private el: ElementRef,
     private hkey: HotkeysService,
@@ -127,6 +133,7 @@ export class AppComponent implements OnInit {
     this.startPageIndex = -1;
     this.$screen = this.el.nativeElement.querySelector('#screen');
     this.$toc = this.el.nativeElement.querySelector('#toc');
+    this.spinner = this.createSpinner();
     fromEvent(window, 'resize').pipe(
       debounce(() => timer(ResizeEventDelay))
     ).subscribe(event => this.onResize(event));
@@ -340,6 +347,14 @@ export class AppComponent implements OnInit {
     this.displayTypeNovelError = this.ndata.getDisplayTypeNovelError(data);
   }
 
+  createSpinner(): OverlayRef {
+    return this.overlay.create({
+      hasBackdrop: true,
+      positionStrategy: this.overlay
+        .position().global().centerHorizontally().centerVertically()
+    });
+  }
+
   createReader(html: string): Nehan.PageReader {
     this.pageIndex = 0;
     this.tocLinks = [];
@@ -468,14 +483,16 @@ export class AppComponent implements OnInit {
 
   onProgressPage(reader: Nehan.PageReader, page: Nehan.LogicalPage) {
     if ((page.index === this.startPageIndex) ||
-      (page.acmCharCount >= this.lastSeekPos && this.isBusy)) {
-      this.isBusy = false;
+      (this.lastSeekPos > 0 && page.acmCharCount >= this.lastSeekPos && this.isBusy)) {
+      console.log('setBusy = false, startPageIndex = %d, lastSeekPos = %d',
+        this.startPageIndex, this.lastSeekPos);
+      this.setBusy(false, '');
       this.setPage(page.index);
     }
   }
 
   onCompletePage(reader: Nehan.PageReader, time: number) {
-    this.isBusy = false;
+    this.setBusy(false, '');
     this.isReaderComplete = true;
     const toc: HTMLElement = this.createOutline();
     if (toc.childElementCount === 0) {
@@ -641,6 +658,24 @@ export class AppComponent implements OnInit {
     event.source._elementRef.nativeElement.blur();
   }
 
+  startSpinner() {
+    this.spinner.attach(new ComponentPortal(MatSpinner));
+  }
+
+  endSpinner() {
+    this.spinner.detach();
+  }
+
+  setBusy(isBusy: boolean, status: string) {
+    if (!this.isBusy && isBusy) {
+      this.startSpinner();
+    } else if (this.isBusy && !isBusy) {
+      this.endSpinner();
+    }
+    this.isBusy = isBusy;
+    this.status = status;
+  }
+
   updateTheme() {
     const href = `assets/themes/${this.theme}/theme.css`;
     this.document.getElementById('theme').setAttribute('href', href);
@@ -650,8 +685,7 @@ export class AppComponent implements OnInit {
     if (!this.compileResult) {
       return;
     }
-    this.isBusy = true;
-    this.status = '';
+    this.setBusy(true, '');
     this.reader = this.createReader(this.novelHtml);
     this.cdr.markForCheck();
   }
@@ -670,8 +704,7 @@ export class AppComponent implements OnInit {
   }
 
   compileFile(filepath: string) {
-    this.status = 'Compiling...';
-    this.isBusy = true;
+    this.setBusy(true, 'Compiling...');
     this.isReaderComplete = false;
     this.tnc.compile(filepath, this.textEncoding).then((result: CompileResult) => {
       this.onCompileDone(result);
