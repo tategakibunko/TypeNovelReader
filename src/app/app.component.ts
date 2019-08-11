@@ -483,7 +483,7 @@ export class AppComponent implements OnInit {
 
   onProgressPage(reader: Nehan.PageReader, page: Nehan.LogicalPage) {
     if ((page.index === this.startPageIndex) ||
-      (this.lastSeekPos === 0 && this.isBusy) ||
+      (this.lastSeekPos === 0 && page.index === 0) ||
       (this.lastSeekPos > 0 && page.acmCharCount >= this.lastSeekPos && this.isBusy)) {
       this.setBusy(false, '');
       this.setPage(page.index);
@@ -725,6 +725,8 @@ export class AppComponent implements OnInit {
       return;
     }
     this.textEncoding = textEncoding;
+    this.lastSeekPos = 0;
+    this.startPageIndex = -1;
     if (this.compileResult) {
       this.compileFile(this.compileTargetFilePath);
     }
