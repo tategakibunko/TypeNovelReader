@@ -38,8 +38,6 @@ For other functions, please run the [examples](/examples) and check it.
 
 `*.AppImage` is Linux Installer.
 
-> Note that version number of this app is linked with TypeNovel version. So if the version of TypeNovel is 0.9.8, then the version of TypeNovelReader is also 0.9.8.
-
 ## Build
 
 Artifacts are generated under the `release/` directory by the following command.

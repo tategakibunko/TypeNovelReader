@@ -38,8 +38,6 @@ TypeNovelを[SemanticNovel](https://github.com/tategakibunko/SemanticNovel)の�
 
 `*.AppImage`はLinux用のInstallerです。
 
-> TypeNovelReaderのバージョンは[TypeNovel](https://github.com/tategakibunko/TypeNovel)のバージョンと連動しています。つまり、TypeNovelが0.9.8ならTypeNovelReaderも0.9.8です。
-
 ## ビルド
 
 以下のコマンドで、`release`ディレクトリ以下に実行ファイルが生成されます。
