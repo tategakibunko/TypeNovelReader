@@ -85,3 +85,17 @@ img.time {
 .season-winter {
   background-image: url("images/lines/winter.png");
 }
+/*
+body[data-time-division="morning"] #screen {
+  background: linear-gradient(to bottom, #05FBFF, #dedede);
+}
+body[data-time-division="noon"] #screen {
+  background: linear-gradient(to bottom, #05FBFF, #dedede);
+}
+body[data-time-division="afternoon"] #screen {
+  background: linear-gradient(to bottom, #e96443, #dedede);
+}
+body[data-time-division="night"] #screen {
+  background: linear-gradient(to bottom, #004e92, #dedede);
+}
+*/
