@@ -4,9 +4,7 @@ TypeNovelReader is reader application for [TypeNovel](https://github.com/tategak
 
 If you write novel according to the spec of [SemanticNovel](https://github.com/tategakibunko/SemanticNovel), plenty of context information is applied to reader UI.
 
-Supports Win/Mac/Linux.
-
-[Installer](https://github.com/tategakibunko/TypeNovelReader/tree/master/release).
+Supports Win/Mac/Linux([Installer](https://github.com/tategakibunko/TypeNovelReader/tree/master/release)).
 
 ## Feature
 
