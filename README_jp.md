@@ -4,6 +4,10 @@ TypeNovelReaderは[TypeNovel](https://github.com/tategakibunko/TypeNovel)で書�
 
 TypeNovelを[SemanticNovel](https://github.com/tategakibunko/SemanticNovel)の仕様に沿って記述すると、豊富な文脈情報がUIに反映されます。
 
+Win/Mac/Linuxに対応しています。
+
+[インストーラー](https://github.com/tategakibunko/TypeNovelReader/tree/master/release)
+
 ## 特徴
 
 ### TypeNovelコンパイラー入り
