@@ -9,7 +9,7 @@ import { mkdirp } from './main-utils';
 export function compileZip(win: BrowserWindow, env: CompileEnv) {
   yauzl.open(env.targetFilePath, (err, zip) => {
     if (err) { throw err; }
-    zip.on('error', (e) => { throw e; });
+    zip.on('error', (e) => { console.error(e); throw e; });
     zip.on('entry', entry => {
       const fileName = entry.fileName;
       // console.log('entry:', fileName);
@@ -53,7 +53,6 @@ export function compileZip(win: BrowserWindow, env: CompileEnv) {
         });
       }
     });
-    // We use 'close' instead of 'end' to open extracted file(data.json).
     zip.on('close', () => {
       if (!env.indexFilePath) {
         win.webContents.send('compileResponse', {
@@ -66,7 +65,12 @@ export function compileZip(win: BrowserWindow, env: CompileEnv) {
       }
       const zipDirName = path.parse(env.targetFilePath).name;
       env.resourcePath = path.join(env.tempPath, zipDirName);
-      compileTypeNovel(win, env);
+
+      // At this point, fd must be closed, but sometimes it's still open.
+      // So we must wait for a while...
+      setTimeout(() => {
+        compileTypeNovel(win, env);
+      }, 500);
     });
   });
 }

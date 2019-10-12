@@ -19,10 +19,9 @@ export interface CompileEnv {
   indexFilePath: string;
   resourcePath: string;
   userDataPath: string;
-  configFilePath: string;
+  configFilePath?: string;
   dataFilePath: string;
   tempPath: string; // for zipped target
-  tncPath: string; // compiler path
   textEncoding: string;
 }
 
@@ -34,10 +33,8 @@ export const InitialCompileEnv: CompileEnv = {
   indexFilePath: '',
   resourcePath: '',
   userDataPath: '',
-  configFilePath: '',
   dataFilePath: '',
   tempPath: '',
-  tncPath: '',
   textEncoding: 'UTF-8',
 };
 

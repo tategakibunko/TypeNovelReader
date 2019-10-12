@@ -1,8 +1,7 @@
 import { app, BrowserWindow, ipcMain } from 'electron';
 import * as path from 'path';
-import * as fs from 'fs';
 import { Store } from './store';
-import { CompileEnv, InitialCompileEnv, TnConfigFileName } from '../common/models';
+import { CompileEnv, InitialCompileEnv } from '../common/models';
 import { createMenu } from './main-menu';
 import { compile } from './compile';
 
@@ -15,21 +14,11 @@ const winEnv: CompileEnv = InitialCompileEnv;
 
 // main app data
 let store: Store;
-// const tnConfigFileName = 'tnconfig.json';
 const winBoundsKey = 'winBounds';
 const initWinBounds: WinBounds = { x: 50, y: 50, width: 900, height: 700 };
 
 const isDev = (): boolean => {
   return process.mainModule.filename.indexOf('app.asar') === -1;
-};
-
-const getTncPath = (resPath: string) => {
-  switch (process.platform) {
-    case 'darwin': return path.join(resPath, 'tnc/mac/Tnc');
-    case 'win32': return path.join(resPath, 'tnc/win/Tnc.exe');
-    case 'linux': return path.join(resPath, 'tnc/linux/Tnc');
-    default: throw new Error('unsupported platform!');
-  }
 };
 
 const loadLastWinBounds = (): WinBounds => {
@@ -57,18 +46,8 @@ function createWindow() {
     }
   });
 
-  const resPath = isDev() ? app.getAppPath() : process.resourcesPath;
   winEnv.userDataPath = app.getPath('userData');
   winEnv.tempPath = path.join(app.getPath('temp'), app.getName());
-  winEnv.tncPath = getTncPath(resPath);
-
-  // Always update initial tnconfig.json in user directory.
-  const initConfigPath = path.join(resPath, 'tnc/config/init.tnconfig.json');
-  const userConfigPath = path.join(winEnv.userDataPath, TnConfigFileName);
-  winEnv.configFilePath = userConfigPath;
-
-  // console.log('copy from %s to %s', initConfigPath, userConfigPath);
-  fs.copyFileSync(initConfigPath, userConfigPath);
 
   // and load the index.html of the app.
   win.loadFile(path.join(__dirname, '/../../../dist/TypeNovelReader/index.html'));

@@ -13,7 +13,7 @@ export class NehanRubyService {
     );
     // <ruby-text data-rt='かん,じ'>漢,字</ruby-text>
     // => <ruby>漢<rt>かん</rt>字<rt>じ</rt></ruby>
-    html = html.replace(/<ruby-text data-rt='(.*?)'>([\s|\S]*?)<\/ruby-text>/g, (_, rt, rb) => {
+    html = html.replace(/<ruby-text data-rt="(.*?)">([\s|\S]*?)<\/ruby-text>/g, (_, rt, rb) => {
       const rbs = rb.split(',').filter((s: string) => s !== '');
       const rts = rt.split(',').filter((s: string) => s !== '');
       const rubyBody = rbs.map((rbText: string, i: number) => {

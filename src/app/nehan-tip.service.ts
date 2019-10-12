@@ -29,10 +29,10 @@ export class NehanTipService {
 
   preCompile(html: string): string {
     this.reset();
-    return html.replace(/<tip data-title='(.*?)'>([\s|\S]*?)<\/tip>/gi, (_, title, innerHTML) => {
+    return html.replace(/<tip data-title="(.*?)">([\s|\S]*?)<\/tip>/gi, (_, title, innerHTML) => {
       const tipId = this.genId();
       this.tips[tipId] = { title, innerHTML };
-      return `<span class='tip' data-id='${tipId}'><icon class='attach'></icon>${title}</span>`;
+      return `<span class="tip" data-id="${tipId}"><icon class="attach"></icon>${title}</span>`;
     });
   }
 

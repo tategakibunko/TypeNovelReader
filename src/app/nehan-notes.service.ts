@@ -29,7 +29,7 @@ export class NehanNotesService {
     return html.replace(/<notes>([\s|\S]*?)<\/notes>/gi, (_, innerHTML) => {
       const notesId = this.genId();
       this.notes[notesId] = { title: 'Notes', innerHTML };
-      return `<span class='notes' data-id='${notesId}'><icon class='info circle'></icon></span>`;
+      return `<span class="notes" data-id="${notesId}"><icon class="info circle"></icon></span>`;
     });
   }
 

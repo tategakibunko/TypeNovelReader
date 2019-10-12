@@ -1,9 +1,9 @@
 import { BrowserWindow } from 'electron';
-import * as child_process from 'child_process';
 import * as path from 'path';
-import { CompileEnv, CompileResult, TnConfigFileName } from '../common/models';
+import { CompileEnv, TnConfigFileName } from '../common/models';
 import { isFileExists } from './main-utils';
 import { loadNovelData } from './compile-env';
+import { Tnc } from 'typenovel';
 
 // Note that TypeNovel only accepts utf-8 for now(v.1.0.0).
 // So env.textEncoding must be always 'UTF-8'.
@@ -13,13 +13,15 @@ export function compileTypeNovel(win: BrowserWindow, env: CompileEnv) {
     env.configFilePath = resConfigFilePath;
   }
   const data = loadNovelData(env);
-  const tncArgs = ['--release', '--config', env.configFilePath, env.indexFilePath];
-  child_process.execFile(env.tncPath, tncArgs, (error, stdout, stderr) => {
-    const html = stdout;
-    const errors = stderr.split('\n').filter(line => line !== '');
-    const result: CompileResult = { env, html, errors, data };
-    // console.log('compileResult:', result);
-    win.webContents.send('compileResponse', result);
+  const tncResult = Tnc.exec({
+    minify: true,
+    format: 'html',
+    inputFile: env.indexFilePath,
+    config: env.configFilePath,
   });
+  const html = tncResult.output;
+  const errors = tncResult.errors.map(err => {
+    return `${err.codePos.path} at line:${err.codePos.line}, col:${err.codePos.col} ${err.message}`;
+  });
+  win.webContents.send('compileResponse', { env, html, errors, data });
 }
-

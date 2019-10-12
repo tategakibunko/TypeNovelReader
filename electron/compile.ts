@@ -10,7 +10,6 @@ import { compileZip } from './compile-zip';
 
 export function compile(win: BrowserWindow, env: CompileEnv, filepath: string, textEncoding: string) {
   env.targetFilePath = filepath;
-  env.configFilePath = path.join(env.userDataPath, TnConfigFileName);
   env.resourcePath = path.dirname(filepath);
   env.textEncoding = textEncoding;
 

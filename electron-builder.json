@@ -24,6 +24,7 @@
     "!angular.json.orig",
     "!electron-builder.json",
     "!electron-builder.json.orig",
+    "!electron-builder2.json.orig",
     "!_config.yml",
     "!karma.conf.js",
     "!tsconfig.app.json",
@@ -40,28 +41,16 @@
   "win": {
     "target": [
       "portable"
-    ],
-    "extraResources": [
-      "tnc/win",
-      "tnc/config"
     ]
   },
   "mac": {
     "target": [
       "dmg"
-    ],
-    "extraResources": [
-      "tnc/mac",
-      "tnc/config"
     ]
   },
   "linux": {
     "target": [
       "AppImage"
-    ],
-    "extraResources": [
-      "tnc/linux",
-      "tnc/config"
     ]
   }
 }
