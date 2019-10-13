@@ -13,10 +13,9 @@ export function compileTypeNovel(win: BrowserWindow, env: CompileEnv) {
     env.configFilePath = resConfigFilePath;
   }
   const data = loadNovelData(env);
-  const tncResult = Tnc.exec({
+  const tncResult = Tnc.fromFile(env.indexFilePath, {
     minify: true,
     format: 'html',
-    inputFile: env.indexFilePath,
     config: env.configFilePath,
   });
   const html = tncResult.output;
