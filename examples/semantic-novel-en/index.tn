@@ -47,19 +47,9 @@
       @p(){
 	This is @tip("tip"){ this is tip content! }. Usefull for supplementary sentence.
       }
-      /* you can use '$tip' instead of '@tip' if inner content is text only.
-      @p(){
-	This is $tip("tip", "this is tip content!"). Usefull for supplementary sentence.
-      }
-      */
       @p(){
 	This is it! @notes(){ 2009 Michael Jackson. }
       }
-      /* you can use '$notes' instead of '@notes' if inner content is text only.
-      @p(){
-	This is it! $notes("2009 Michael Jackson")
-      }
-      */
     }
   }
 }
