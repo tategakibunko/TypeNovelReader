@@ -20,7 +20,7 @@ export function compileTypeNovel(win: BrowserWindow, env: CompileEnv) {
   });
   const html = tncResult.output;
   const errors = tncResult.errors.map(err => {
-    return `${err.codePos.path} at line:${err.codePos.line}, col:${err.codePos.col} ${err.message}`;
+    return `${err.codePos.path} at line:${err.codePos.startLine}, col:${err.codePos.startColumn} ${err.message}`;
   });
   win.webContents.send('compileResponse', { env, html, errors, data });
 }
