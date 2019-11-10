@@ -37,7 +37,7 @@
     "nehan": "^6.0.38",
     "rxjs": "~6.5.3",
     "tslib": "^1.9.0",
-    "typenovel": "^1.1.12",
+    "typenovel": "^1.1.13",
     "yauzl": "^2.10.0",
     "zone.js": "~0.9.1"
   },
@@ -65,6 +65,6 @@
     "protractor": "~5.4.0",
     "ts-node": "~7.0.0",
     "tslint": "~5.15.0",
-    "typescript": "^3.7.2"
+    "typescript": "~3.4.3"
   }
 }
