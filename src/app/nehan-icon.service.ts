@@ -20,7 +20,8 @@ export class NehanIconService {
         content: ' ',
         '@create': (ctx: Nehan.DomCallbackContext) => {
           const i = document.createElement('i');
-          const iconName = ctx.box.element.className;
+          // const iconName = ctx.box.element.className;
+          const iconName = ctx.box.env.element.className;
           i.className = ['ui', 'icon', iconName].join(' ');
           i.style.width = '1em';
           i.style.margin = '0';

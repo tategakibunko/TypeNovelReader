@@ -41,7 +41,8 @@ export class NehanNotesService {
         color: '#ea4c88',
         '@create': (ctx: DomCallbackContext) => {
           ctx.dom.addEventListener('click', (e: Event) => {
-            const notesId = ctx.box.element.dataset.id;
+            // const notesId = ctx.box.element.dataset.id;
+            const notesId = ctx.box.env.element.dataset.id;
             const notes = this.notes[notesId] || { title: 'Notes', content: 'no content' };
             args.onClick(e, notes);
           });

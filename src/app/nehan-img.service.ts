@@ -17,7 +17,8 @@ export class NehanImgService {
     return new Nehan.CssStyleSheet({
       img: {
         '@create': (ctx: Nehan.DomCallbackContext) => {
-          const src = ctx.box.element.getAttribute('src');
+          // const src = ctx.box.element.getAttribute('src');
+          const src = ctx.box.env.element.getAttribute('src');
           // if not remote image, set local absolute path.
           if (!src.toLowerCase().startsWith('http')) {
             const resPath = path.join(args.basePath, src);

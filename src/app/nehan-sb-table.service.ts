@@ -66,7 +66,8 @@ export class NehanSbTableService {
           return {};
         },
         '@create': (ctx: Nehan.DomCallbackContext) => {
-          const charaKey = ctx.box.element.dataset.charaKey;
+          // const charaKey = ctx.box.element.dataset.charaKey;
+          const charaKey = ctx.box.env.element.dataset.charaKey;
           if (charaKey) {
             const charaName = args.getCharacterName(charaKey);
             ctx.dom.setAttribute('title', charaName);

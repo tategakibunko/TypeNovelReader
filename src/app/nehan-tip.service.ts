@@ -48,7 +48,8 @@ export class NehanTipService {
         color,
         '@create': (ctx: Nehan.DomCallbackContext) => {
           ctx.dom.addEventListener('click', (e: Event) => {
-            const tid = ctx.box.element.dataset.id;
+            // const tid = ctx.box.element.dataset.id;
+            const tid = ctx.box.env.element.dataset.id;
             const tip = this.tips[tid] || { title: 'no title', content: 'no content' };
             args.onClick(e, tip);
           });

@@ -20,16 +20,22 @@ export class NehanSpeakService {
           const a = document.createElement('a');
           const icon = document.createElement('i');
           const fontSize = ctx.box.env.fontSize;
-          new Nehan.LogicalPos({
+          // new Nehan.LogicalPos({
+          //   start: -Math.floor(fontSize * 1.5),
+          //   before: Math.floor(fontSize * 0.125)
+          // }).getCss(ctx.box).apply(a);
+          const pos = new Nehan.LogicalPos({
             start: -Math.floor(fontSize * 1.5),
             before: Math.floor(fontSize * 0.125)
-          }).getCss(ctx.box).apply(a);
+          });
+          pos.acceptCssEvaluator(new Nehan.LogicalCssEvaluator(ctx.box.env.writingMode)).applyTo(a.style);
           icon.className = 'user outline icon';
           a.style.position = 'absolute';
           a.style.display = 'block';
           a.appendChild(icon);
           ctx.dom.appendChild(a);
-          const charaKey = ctx.box.element.dataset.character;
+          // const charaKey = ctx.box.element.dataset.character;
+          const charaKey = ctx.box.env.element.dataset.character;
           if (charaKey) {
             a.dataset.tooltip = args.getTooltip(charaKey);
             icon.addEventListener('click', (e) => {

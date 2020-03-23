@@ -86,7 +86,7 @@ export class AppComponent implements OnInit {
   public lastSeekPos: number;
   public startPageIndex: number;
   public compileResult: CompileResult | undefined;
-  public reader: Nehan.PageReader;
+  public reader: Nehan.PagedHtmlDocument;
   public pageIndex: number;
   public tocLinks: TocLink[] = [];
   public config: ReaderConfig = { ...InitialConfig };
@@ -356,7 +356,7 @@ export class AppComponent implements OnInit {
     });
   }
 
-  createReader(html: string): Nehan.PageReader {
+  createReader(html: string): Nehan.PagedHtmlDocument {
     this.pageIndex = 0;
     this.tocLinks = [];
     if (this.isFirstCompile) {
@@ -365,16 +365,15 @@ export class AppComponent implements OnInit {
     }
     // console.log('compiled html:', this.compileHTML(html));
     const html2 = this.compileHTML(html);
-    const hdoc = new Nehan.HtmlDocument(html2, {
+    const reader = new Nehan.PagedHtmlDocument(html2, {
       styleSheets: this.createStyles(this.config)
     });
-    const reader = hdoc.createPageReader();
     reader.render({
-      onProgressPage: (caller: Nehan.PageReader, box: Nehan.LogicalPage) => {
-        this.onProgressPage(caller, box);
+      onPage: (context) => {
+        this.onProgressPage(context.page);
       },
-      onCompletePage: (caller: Nehan.PageReader, time: number) => {
-        this.onCompletePage(caller, time);
+      onComplete: (context) => {
+        this.onCompletePage(context.time);
       }
     });
     this.setupShortcut();
@@ -482,7 +481,7 @@ export class AppComponent implements OnInit {
     });
   }
 
-  onProgressPage(reader: Nehan.PageReader, page: Nehan.LogicalPage) {
+  onProgressPage(page: Nehan.Page) {
     if ((page.index === this.startPageIndex) ||
       (this.lastSeekPos === 0 && page.index === 0) ||
       (this.lastSeekPos > 0 && page.acmCharCount >= this.lastSeekPos && this.isBusy)) {
@@ -491,7 +490,7 @@ export class AppComponent implements OnInit {
     }
   }
 
-  onCompletePage(reader: Nehan.PageReader, time: number) {
+  onCompletePage(time: number) {
     this.setBusy(false, '');
     this.isReaderComplete = true;
     const toc: HTMLElement = this.createOutline();
@@ -504,7 +503,7 @@ export class AppComponent implements OnInit {
     }
     this.tocLinks = this.createTocLinks(this.$toc);
     this.curToc = this.setCurrentToc(this.pageIndex);
-    this.setAnchorJump(this.reader.getPage(0).dom);
+    this.setAnchorJump(this.reader.getPage(0).dom as HTMLElement);
   }
 
   setupShortcut() {
@@ -533,21 +532,20 @@ export class AppComponent implements OnInit {
   }
 
   createOutline(): HTMLElement {
-    return this.reader.createOutlineElement({
-      onSection: (section) => {
-        const a = document.createElement('a');
-        a.appendChild(document.createTextNode(section.title));
-        a.href = '#' + section.pageIndex;
-        a.onclick = (e) => {
-          this.setPage(section.pageIndex);
-          return false;
-        };
-        return a;
-      }
+    const etor = new Nehan.LayoutOutlineEvaluator((section) => {
+      const a = document.createElement('a');
+      a.appendChild(document.createTextNode(section.title));
+      a.href = '#' + section.pageIndex;
+      a.onclick = (e) => {
+        this.setPage(section.pageIndex);
+        return false;
+      };
+      return a;
     });
+    return this.reader.createOutline(etor);
   }
 
-  findScene(page: Nehan.LogicalPage): HTMLElement | undefined {
+  findScene(page: Nehan.Page): HTMLElement | undefined {
     const scenes = Array.from(page.dom.querySelectorAll('.nehan-e-scene')).map((e => e as HTMLElement));
     if (scenes.length === 0) {
       return undefined;
@@ -573,7 +571,7 @@ export class AppComponent implements OnInit {
     bodyData.month = String(this.sdata.monthOfDate(bodyData.date));
   }
 
-  onPage(page: Nehan.LogicalPage) {
+  onPage(page: Nehan.Page) {
     this.lastSeekPos = page.acmCharCount;
     const scene = this.findScene(page);
     this.onScene(scene);
@@ -581,7 +579,7 @@ export class AppComponent implements OnInit {
 
   setPage(index: number) {
     if (this.isDialogOpen || this.isBusy) { return; }
-    const page: Nehan.LogicalPage = this.reader.getPage(index);
+    const page: Nehan.Page = this.reader.getPage(index);
     this.pageIndex = index;
     if (this.$screen.firstChild) {
       this.$screen.replaceChild(page.dom, this.$screen.firstChild);
@@ -590,7 +588,7 @@ export class AppComponent implements OnInit {
     }
     this.onPage(page);
     this.curToc = this.setCurrentToc(index);
-    this.setAnchorJump(page.dom);
+    this.setAnchorJump(page.dom as HTMLElement);
   }
 
   setLeftPage() {
