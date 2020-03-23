@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import * as path from 'path';
-import * as Nehan from 'nehan';
+// import * as Nehan from 'nehan';
+import * as Nehan from '../../../nehan';
 
 interface ImgStyleArgs {
   basePath: string;

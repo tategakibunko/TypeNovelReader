@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import * as Nehan from 'nehan';
+// import * as Nehan from 'nehan';
+import * as Nehan from '../../../nehan';
 import { ReaderConfig } from '../../common/models';
 import { DeviceFontService } from './device-font.service';
 

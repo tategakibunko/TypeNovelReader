@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import * as Nehan from 'nehan';
+// import * as Nehan from 'nehan';
+import * as Nehan from '../../../nehan';
 import { SemanticDataService } from './semantic-data.service';
 
 @Injectable({

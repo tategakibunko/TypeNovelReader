@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { InfoDialogData } from '../../common/models';
-import * as Nehan from 'nehan';
+// import * as Nehan from 'nehan';
+import * as Nehan from '../../../nehan';
 
 interface TipArgs {
   fontFamily: string;
