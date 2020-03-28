@@ -26,7 +26,6 @@ export class NehanIconService {
           i.style.width = '1em';
           i.style.margin = '0';
           ctx.dom.appendChild(i);
-          ctx.box.clearChildren();
         }
       }
     });

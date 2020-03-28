@@ -19,7 +19,7 @@ export class NehanSpeakService {
         '@create': (ctx: Nehan.DomCallbackContext) => {
           const a = document.createElement('a');
           const icon = document.createElement('i');
-          const fontSize = ctx.box.env.fontSize;
+          const fontSize = ctx.box.env.font.size;
           // new Nehan.LogicalPos({
           //   start: -Math.floor(fontSize * 1.5),
           //   before: Math.floor(fontSize * 0.125)
