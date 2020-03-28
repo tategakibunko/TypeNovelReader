@@ -62,8 +62,8 @@ export class NehanSceneService {
             // const curNehanDataset = ctx.box.element.dataset;
             const curNehanDataset = ctx.box.env.element.dataset;
             // copy parent-dataset(of Nehan) to current-dataset(of Nehan).
-            if (ctx.box.parent) {
-              const srcNehanParentDataset = ctx.box.parent.element.dataset;
+            if (ctx.box.env.element.parent) {
+              const srcNehanParentDataset = ctx.box.env.element.parent.dataset;
               this.loadDataset(srcNehanParentDataset, curNehanDataset);
             }
             // copy current-dataset(of Nehan) to current-dataset(of DOM).
