@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-// import * as Nehan from 'nehan';
 import * as Nehan from '../../../nehan';
 import { SemanticDataService } from './semantic-data.service';
 
@@ -59,14 +58,11 @@ export class NehanSceneService {
           const dstDOMDataset = ctx.dom.dataset;
           if (!dstDOMDataset.sceneId) {
             dstDOMDataset.sceneId = this.genId();
-            // const curNehanDataset = ctx.box.element.dataset;
             const curNehanDataset = ctx.box.env.element.dataset;
-            // copy parent-dataset(of Nehan) to current-dataset(of Nehan).
             if (ctx.box.env.element.parent) {
               const srcNehanParentDataset = ctx.box.env.element.parent.dataset;
               this.loadDataset(srcNehanParentDataset, curNehanDataset);
             }
-            // copy current-dataset(of Nehan) to current-dataset(of DOM).
             this.loadDataset(curNehanDataset, dstDOMDataset);
           }
         }
