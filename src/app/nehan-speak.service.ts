@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-// import * as Nehan from 'nehan';
 import * as Nehan from '../../../nehan';
 
 interface SpeechArgs {
@@ -20,10 +19,6 @@ export class NehanSpeakService {
           const a = document.createElement('a');
           const icon = document.createElement('i');
           const fontSize = ctx.box.env.font.size;
-          // new Nehan.LogicalPos({
-          //   start: -Math.floor(fontSize * 1.5),
-          //   before: Math.floor(fontSize * 0.125)
-          // }).getCss(ctx.box).apply(a);
           const pos = new Nehan.LogicalPos({
             start: -Math.floor(fontSize * 1.5),
             before: Math.floor(fontSize * 0.125)
@@ -34,7 +29,6 @@ export class NehanSpeakService {
           a.style.display = 'block';
           a.appendChild(icon);
           ctx.dom.appendChild(a);
-          // const charaKey = ctx.box.element.dataset.character;
           const charaKey = ctx.box.env.element.dataset.character;
           if (charaKey) {
             a.dataset.tooltip = args.getTooltip(charaKey);

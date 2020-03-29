@@ -61,11 +61,11 @@ export class NehanSbTableService {
           image.setAttribute('width', String(args.avatarSize));
           image.setAttribute('height', String(args.avatarSize));
           image.setAttribute('src', imageSrc);
+          Nehan.CssLoader.load(image);
           ctx.element.appendChild(image);
           return {};
         },
         '@create': (ctx: Nehan.DomCallbackContext) => {
-          // const charaKey = ctx.box.element.dataset.charaKey;
           const charaKey = ctx.box.env.element.dataset.charaKey;
           if (charaKey) {
             const charaName = args.getCharacterName(charaKey);

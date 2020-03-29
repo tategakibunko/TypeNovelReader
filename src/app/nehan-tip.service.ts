@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { InfoDialogData } from '../../common/models';
-// import * as Nehan from 'nehan';
 import * as Nehan from '../../../nehan';
 
 interface TipArgs {
@@ -48,7 +47,6 @@ export class NehanTipService {
         color,
         '@create': (ctx: Nehan.DomCallbackContext) => {
           ctx.dom.addEventListener('click', (e: Event) => {
-            // const tid = ctx.box.element.dataset.id;
             const tid = ctx.box.env.element.dataset.id;
             const tip = this.tips[tid] || { title: 'no title', content: 'no content' };
             args.onClick(e, tip);

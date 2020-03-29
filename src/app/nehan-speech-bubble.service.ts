@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-// import * as Nehan from 'nehan';
 import * as Nehan from '../../../nehan';
 
 interface SpeechBubbleArgs {
@@ -130,10 +129,6 @@ export class NehanSpeechBubbleService {
           s.width = s.height = '0';
           s.borderWidth = '8px';
           s.borderStyle = 'solid';
-          // logical -> physical
-          // sbData.insidePos.getCss(ctx.box).apply(inner);
-          // sbData.insideBorderColor.getCss(ctx.box).apply(inner);
-          // ctx.dom.appendChild(inner);
           const evaluator = new Nehan.LogicalCssEvaluator(ctx.box.env.writingMode);
           sbData.insidePos.acceptCssEvaluator(evaluator).applyTo(inner.style);
           sbData.insideBorderColor.acceptCssEvaluator(evaluator).applyTo(inner.style);
