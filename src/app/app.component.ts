@@ -362,8 +362,8 @@ export class AppComponent implements OnInit {
       this.setFirstConfig();
       this.isFirstCompile = false;
     }
-    // console.log('compiled html:', this.compileHTML(html));
     const html2 = this.compileHTML(html);
+    // console.log('compiled html:', html2);
     const reader = new Nehan.PagedHtmlDocument(html2, {
       styleSheets: this.createStyles(this.config)
     });
