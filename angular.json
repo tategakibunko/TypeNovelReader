@@ -29,8 +29,7 @@
             ],
             "styles": [
               "src/styles.scss",
-              "./semantic-ui/semantic.min.css",
-              "./node_modules/nehan/css/nehan.css"
+              "./semantic-ui/semantic.min.css"
             ],
             "scripts": []
           },

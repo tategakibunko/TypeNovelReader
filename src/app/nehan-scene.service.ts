@@ -52,8 +52,7 @@ export class NehanSceneService {
     return new Nehan.CssStyleSheet({
       'div.scene': {
         display: 'block',
-        extent: '100%',
-        pageBreakBefore: 'always',
+        pageBreakAfter: 'always',
         '@create': (ctx: Nehan.DomCallbackContext) => {
           const dstDOMDataset = ctx.dom.dataset;
           if (!dstDOMDataset.sceneId) {

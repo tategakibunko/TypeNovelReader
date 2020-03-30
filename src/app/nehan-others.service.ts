@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-// import * as Nehan from 'nehan';
 import * as Nehan from '../../../nehan';
 import { DeviceFontService } from './device-font.service';
 
