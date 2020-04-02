@@ -29,7 +29,7 @@
     "@angular/platform-browser": "~9.1.0",
     "@angular/platform-browser-dynamic": "~9.1.0",
     "@angular/router": "~9.1.0",
-    "angular2-hotkeys": "^2.1.4",
+    "angular2-hotkeys": "^2.2.0",
     "encoding-japanese": "^1.0.29",
     "marked": "^0.7.0",
     "md5": "^2.2.1",
