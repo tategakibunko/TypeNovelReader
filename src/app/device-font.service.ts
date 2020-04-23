@@ -11,12 +11,12 @@ const fontFamilies = {
     gothic: '"游ゴシック", "Yu Gothic", YuGothic, "Osaka", "Meiryo", "メイリオ"',
   },
   macintosh: {
-    mincho: '"ヒラギノ明朝 Pro W3", "Hiragino Mincho Pro", "HiraMinProN - W3", monospace',
-    gothic: '"Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro W3", "Osaka", monospace',
+    mincho: '"ヒラギノ明朝 Pro W3", "Hiragino Mincho Pro", "Hiragino Mincho ProN", "HiraMinProN - W3", monospace',
+    gothic: '"Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro W3", "Hiragino Sans", "Osaka", monospace',
   },
   'apple-mobile': {
-    mincho: '"ヒラギノ明朝 Pro W3", "Hiragino Mincho Pro", "HiraMinProN - W3", monospace',
-    gothic: '"Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro W3", "Osaka", monospace',
+    mincho: '"ヒラギノ明朝 Pro W3", "Hiragino Mincho Pro", "Hiragino Mincho ProN", "HiraMinProN - W3", monospace',
+    gothic: '"Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro W3", "Hiragino Sans", "Osaka", monospace',
   },
   'chrome-os': {
     mincho: '"ipa-mincho", "IPA明朝", "IPA Mincho", "ＭＳ 明朝", "MS Mincho", monospace',
