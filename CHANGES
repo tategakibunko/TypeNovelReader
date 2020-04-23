@@ -6,8 +6,9 @@ Mark "*": bug fixed.
 Mark "!": change that can break compatibility with older version
 ===============================================================================
 
-version 1.5.1
+version 1.5.1, 2020/04/23
 =========================
+* Updated device font for mac(Catalina)
 o Rebuild by nehan7.1.1
 
 version 1.5.0, 2020/04/17
