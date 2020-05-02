@@ -6,7 +6,7 @@ Mark "*": bug fixed.
 Mark "!": change that can break compatibility with older version
 ===============================================================================
 
-version 1.6.1
+version 1.6.1, 2020/05/02
 =========================
 o Rebuild by nehan7.2.2
 
