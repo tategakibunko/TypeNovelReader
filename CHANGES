@@ -6,6 +6,10 @@ Mark "*": bug fixed.
 Mark "!": change that can break compatibility with older version
 ===============================================================================
 
+version 1.6.4, 2020/05/09
+=========================
+o Use textAlign:'justify' by default.
+
 version 1.6.3, 2020/05/09
 =========================
 o Rebuild by nehan7.2.7
