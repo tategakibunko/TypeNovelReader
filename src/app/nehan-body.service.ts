@@ -28,7 +28,8 @@ export class NehanBodyService {
         fontFamily,
         padding: `${blockPaddingSize}px ${inlinePaddingSize}px`,
         fontSize: config.fontSize,
-        writingMode: config.writingMode
+        writingMode: config.writingMode,
+        textAlign: 'justify',
       }
     });
   }
