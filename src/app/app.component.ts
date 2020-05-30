@@ -3,7 +3,7 @@ import { DOCUMENT } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
 import { TncService } from './tnc.service';
 import * as path from 'path';
-import * as Nehan from '../../../nehan/';
+import * as Nehan from 'nehan';
 import { remote } from 'electron';
 import { MatSliderChange } from '@angular/material/slider';
 import { fromEvent, timer } from 'rxjs';

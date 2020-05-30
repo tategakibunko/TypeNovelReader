@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import * as Nehan from '../../../nehan';
+import * as Nehan from 'nehan';
 
 interface SpeechBubbleArgs {
   direction?: 'before' | 'end' | 'after' | 'start';
