@@ -33,7 +33,7 @@
     "encoding-japanese": "^1.0.29",
     "marked": "^0.7.0",
     "md5": "^2.2.1",
-    "nehan": "^7.2.8",
+    "nehan": "^7.2.9",
     "rxjs": "~6.5.5",
     "tslib": "^2.0.0",
     "typenovel": "^1.1.13",
