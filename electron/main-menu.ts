@@ -3,7 +3,7 @@ import { app, dialog, Menu, BrowserWindow } from 'electron';
 const isMac = process.platform === 'darwin';
 
 function openFile(win: BrowserWindow) {
-  dialog.showOpenDialog({ properties: ['openFile'] }, (files) => {
+  dialog.showOpenDialog(win, { properties: ['openFile'] }).then(files => {
     if (files) {
       win.webContents.send('open_file', files[0]);
     }
@@ -104,7 +104,9 @@ export function createMenu(win: BrowserWindow) {
       submenu: [
         {
           label: 'Learn More',
-          click() { require('electron').shell.openExternalSync('https://tb.antiscroll.com'); }
+          click() {
+            require('electron').shell.openExternal('https://tb.antiscroll.com');
+          }
         }
       ]
     }
