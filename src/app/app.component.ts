@@ -286,7 +286,10 @@ export class AppComponent implements OnInit {
   }
 
   openHomepage() {
-    remote.shell.openExternalSync(this.homepage);
+    // openExternalSync is deprecated in electron(v7).
+    // https://github.com/sindresorhus/caprine/issues/1153
+    // remote.shell.openExternalSync(this.homepage);
+    remote.shell.openExternal(this.homepage);
   }
 
   openInfoDialog(data: InfoDialogData) {
