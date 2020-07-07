@@ -3,9 +3,9 @@ import { app, dialog, Menu, BrowserWindow } from 'electron';
 const isMac = process.platform === 'darwin';
 
 function openFile(win: BrowserWindow) {
-  dialog.showOpenDialog(win, { properties: ['openFile'] }).then(files => {
-    if (files) {
-      win.webContents.send('open_file', files[0]);
+  dialog.showOpenDialog(win, { properties: ['openFile'] }).then((ret: Electron.OpenDialogReturnValue) => {
+    if (ret) {
+      win.webContents.send('open_file', ret.filePaths[0]);
     }
   });
 }
