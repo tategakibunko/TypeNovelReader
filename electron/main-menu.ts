@@ -14,7 +14,8 @@ export function createMenu(win: BrowserWindow) {
   const template = [
     // { role: 'appMenu' }
     ...(process.platform === 'darwin' ? [{
-      label: app.getName(),
+      // label: app.getName(),
+      label: app.name,
       submenu: [
         { role: 'about' },
         { type: 'separator' },

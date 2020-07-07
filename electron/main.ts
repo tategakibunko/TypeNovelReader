@@ -47,7 +47,8 @@ function createWindow() {
   });
 
   winEnv.userDataPath = app.getPath('userData');
-  winEnv.tempPath = path.join(app.getPath('temp'), app.getName());
+  // winEnv.tempPath = path.join(app.getPath('temp'), app.getName());
+  winEnv.tempPath = path.join(app.getPath('temp'), app.name);
 
   // and load the index.html of the app.
   win.loadFile(path.join(__dirname, '/../../../dist/TypeNovelReader/index.html'));
