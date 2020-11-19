@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ChangeDetectorRef, NgZone, Inject } from '@angular/core';
+import { Component, ElementRef, OnInit, ChangeDetectorRef, NgZone, Inject, HostListener } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
 import { TncService } from './tnc.service';
@@ -8,7 +8,7 @@ import { remote } from 'electron';
 import { MatSliderChange } from '@angular/material/slider';
 import { fromEvent, timer } from 'rxjs';
 import { debounce } from 'rxjs/operators';
-import { HotkeysService, Hotkey } from 'angular2-hotkeys';
+// import { HotkeysService, Hotkey } from 'angular2-hotkeys';
 import {
   CompileResult,
   TocLink,
@@ -100,7 +100,7 @@ export class AppComponent implements OnInit {
     private overlay: Overlay,
     private tnc: TncService,
     private el: ElementRef,
-    private hkey: HotkeysService,
+    // private hkey: HotkeysService,
     private cdr: ChangeDetectorRef,
     private dialog: MatDialog,
     private dfont: DeviceFontService,
@@ -378,7 +378,7 @@ export class AppComponent implements OnInit {
         this.onCompletePage(context.time);
       }
     });
-    this.setupShortcut();
+    // this.setupShortcut();
     this.saveConfig(this.config);
     // console.log('currentConfig:', this.config);
     return reader;
@@ -508,6 +508,7 @@ export class AppComponent implements OnInit {
     this.setAnchorJump(this.reader.getPage(0).dom as HTMLElement);
   }
 
+  /*
   setupShortcut() {
     this.hkey.add(new Hotkey('left', (event: KeyboardEvent): boolean => {
       this.setLeftPage();
@@ -526,6 +527,7 @@ export class AppComponent implements OnInit {
       return false;
     }));
   }
+  */
 
   createTocLinks(tocDom: HTMLElement): TocLink[] {
     return Array.from(tocDom.querySelectorAll('a')).map(a => {
@@ -593,14 +595,17 @@ export class AppComponent implements OnInit {
     this.setAnchorJump(page.dom as HTMLElement);
   }
 
+  @HostListener('document:keydown.arrowleft')
   setLeftPage() {
     this.isRtlMode ? this.setNextPage() : this.setPrevPage();
   }
 
+  @HostListener('document:keydown.arrowright')
   setRightPage() {
     this.isRtlMode ? this.setPrevPage() : this.setNextPage();
   }
 
+  @HostListener('document:keydown.j')
   setNextPage() {
     if (this.isDialogOpen) { return; }
     const index = Math.min(this.pageIndex + 1, this.pageCount - 1);
@@ -609,6 +614,7 @@ export class AppComponent implements OnInit {
     }
   }
 
+  @HostListener('document:keydown.k')
   setPrevPage() {
     if (this.isDialogOpen) { return; }
     const index = Math.max(this.pageIndex - 1, 0);

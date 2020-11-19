@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HotkeyModule } from 'angular2-hotkeys';
+// import { HotkeyModule } from 'angular2-hotkeys';
 import { AppComponent } from './app.component';
 
 // angular/material
@@ -36,7 +36,7 @@ const matModules = [
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    HotkeyModule.forRoot(),
+    // HotkeyModule.forRoot(),
     OverlayModule,
     ...matModules,
   ],
