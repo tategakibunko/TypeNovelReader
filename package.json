@@ -30,8 +30,8 @@
     "@angular/platform-browser-dynamic": "~11.0.2",
     "@angular/router": "~11.0.2",
     "encoding-japanese": "^1.0.29",
-    "marked": "^0.7.0",
-    "md5": "^2.2.1",
+    "marked": "^1.2.5",
+    "md5": "^2.3.0",
     "nehan": "^7.3.7",
     "rxjs": "~6.6.3",
     "tslib": "^2.0.0",
@@ -47,7 +47,7 @@
     "@types/electron": "^1.6.10",
     "@types/jasmine": "~3.6.0",
     "@types/jasminewd2": "^2.0.8",
-    "@types/marked": "^0.6.5",
+    "@types/marked": "^1.2.0",
     "@types/node": "^12.12.44",
     "codelyzer": "^6.0.0",
     "electron": "^7.3.2",
@@ -63,6 +63,6 @@
     "protractor": "~7.0.0",
     "ts-node": "~7.0.0",
     "tslint": "~6.1.0",
-    "typescript": "~4.0.5"
+    "typescript": "^4.1.2"
   }
 }
