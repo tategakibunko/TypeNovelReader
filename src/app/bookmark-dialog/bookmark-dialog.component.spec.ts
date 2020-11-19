@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { BookmarkDialogComponent } from './bookmark-dialog.component';
 
@@ -6,7 +6,7 @@ describe('BookmarkDialogComponent', () => {
   let component: BookmarkDialogComponent;
   let fixture: ComponentFixture<BookmarkDialogComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ BookmarkDialogComponent ]
     })
