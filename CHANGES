@@ -6,9 +6,10 @@ Mark "*": bug fixed.
 Mark "!": change that can break compatibility with older version
 ===============================================================================
 
-version 1.6.6, 2021/01/16
+version 1.7.0, 2021/01/16
 =========================
 * Added link color.
+! Updated TypeNovel(v1.1.13 -> v1.2.0).
 
 version 1.6.5, 2020/11/20
 =========================
