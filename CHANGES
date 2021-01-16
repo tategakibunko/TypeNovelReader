@@ -6,6 +6,10 @@ Mark "*": bug fixed.
 Mark "!": change that can break compatibility with older version
 ===============================================================================
 
+version 1.6.6, 2021/01/16
+=========================
+* Added link color.
+
 version 1.6.5, 2020/11/20
 =========================
 o Updated angular(v10 -> v11)
