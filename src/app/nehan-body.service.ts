@@ -30,7 +30,10 @@ export class NehanBodyService {
         fontSize: config.fontSize,
         writingMode: config.writingMode,
         textAlign: 'justify',
-      }
+      },
+      a: {
+        color: '#4183C4',
+      },
     });
   }
 }
