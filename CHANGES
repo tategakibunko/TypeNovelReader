@@ -6,6 +6,10 @@ Mark "*": bug fixed.
 Mark "!": change that can break compatibility with older version
 ===============================================================================
 
+version 1.7.1
+=========================
+* Updated marked(1.2.9 -> 2.0.0).
+
 version 1.7.0, 2021/01/16
 =========================
 * Added link color.
