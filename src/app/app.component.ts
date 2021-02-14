@@ -66,6 +66,20 @@ const InitialConfig = {
 };
 const DefaultEncoding = 'UTF-8';
 
+Nehan.Config.isTcyWord = (word: string, context: { prev: Nehan.ICharacter, next: Nehan.ICharacter }) => {
+  switch (word) {
+    case '!!': case '!?': case '?!': case '??': return true;
+  }
+  // \u203C = DOUBLE EXCLAMATION MARK
+  // \u2047 = DOUBLE QUESTION MARK
+  // \u2048 = QUESTION EXCLAMATION MARK
+  // \u2049 = EXCLAMATION QUESTION MARK
+  if (word.match(/^[\u203C\u2047-\u2049]/)) {
+    return true;
+  }
+  return false;
+};
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
