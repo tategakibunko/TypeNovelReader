@@ -66,7 +66,7 @@ const InitialConfig = {
 };
 const DefaultEncoding = 'UTF-8';
 
-Nehan.Config.isTcyWord = (word: string, context: { prev: Nehan.ICharacter, next: Nehan.ICharacter }) => {
+Nehan.Config.isTcyWord = (word: string, context: { prev?: Nehan.ICharacter, next?: Nehan.ICharacter }) => {
   switch (word) {
     case '!!': case '!?': case '?!': case '??': return true;
   }
@@ -76,6 +76,22 @@ Nehan.Config.isTcyWord = (word: string, context: { prev: Nehan.ICharacter, next:
   // \u2049 = EXCLAMATION QUESTION MARK
   if (word.match(/^[\u203C\u2047-\u2049]/)) {
     return true;
+  }
+  const prev = context.prev;
+  const next = context.next;
+  if (word.match(/\d{1,2}/)) {
+    if (next) {
+      switch (next.text) {
+        case '月': case '日': return true;
+      }
+    }
+  }
+  if (word.match(/\d{1,3}/)) {
+    if (next) {
+      switch (next.text) {
+        case '度': case '回': return true;
+      }
+    }
   }
   return false;
 };
