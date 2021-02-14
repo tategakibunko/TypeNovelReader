@@ -77,12 +77,13 @@ Nehan.Config.isTcyWord = (word: string, context: { prev?: Nehan.ICharacter, next
   if (word.match(/^[\u203C\u2047-\u2049]/)) {
     return true;
   }
+  /*
   const prev = context.prev;
   const next = context.next;
   if (word.match(/\d{1,2}/)) {
     if (next) {
       switch (next.text) {
-        case '月': case '日': return true;
+        case '月': case '日': case '分': return true;
       }
     }
   }
@@ -93,6 +94,7 @@ Nehan.Config.isTcyWord = (word: string, context: { prev?: Nehan.ICharacter, next
       }
     }
   }
+  */
   return false;
 };
 
