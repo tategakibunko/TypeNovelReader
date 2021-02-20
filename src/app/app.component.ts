@@ -615,6 +615,10 @@ export class AppComponent implements OnInit {
     this.onPage(page);
     this.curToc = this.setCurrentToc(index);
     // this.setAnchorJump(page.dom as HTMLElement);
+    const setPageEvent = new Event("setpage");
+    Array.from(page.dom.querySelectorAll("a[href^='#']")).forEach(link => {
+      link.dispatchEvent(setPageEvent);
+    });
   }
 
   @HostListener('document:keydown.arrowleft')
