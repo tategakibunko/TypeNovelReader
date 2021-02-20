@@ -37,13 +37,8 @@ export class NehanAnchorService {
 
           // console.log("create anchor(%s), target:%o", href, anchor);
           ctx.dom.addEventListener("click", (e: Event) => {
-            // console.log(`click anchor:${anchorName}`);
-            // get anchor dynamically.
             const anchor = ctx.flowRoot.getAnchor(anchorName);
-            // console.log(anchor);
-            // console.log(`selected anchor:index = ${anchor.pageIndex}`);
             if (!anchor) {
-              // console.error(`anchor(${anchor.name}) not found!`);
               return false;
             }
             e.preventDefault();
@@ -59,21 +54,28 @@ export class NehanAnchorService {
             }
           });
           ctx.dom.onmouseover = (e) => {
-            if (win.childElementCount === 0) {
-              const anchor = ctx.flowRoot.getAnchor(anchorName);
-              if (!anchor) {
-                return;
-              }
-              if (anchor.box && anchor.box.extent === 0 || !anchor.dom) {
-                return;
-              }
-              const anchorTarget = anchor.dom.cloneNode(true) as HTMLElement;
-              anchorTarget.style.left = "";
-              anchorTarget.style.top = "";
-              anchorTarget.style.right = "";
-              anchorTarget.style.bottom = "";
-              anchorTarget.style.position = "relative";
-              win.appendChild(anchorTarget);
+            if (ctx.dom.contains(win)) {
+              return;
+            }
+            const anchor = ctx.flowRoot.getAnchor(anchorName);
+            if (!anchor) {
+              return;
+            }
+            if (anchor.box && anchor.box.extent === 0) {
+              return;
+            }
+            if (anchor.box && !anchor.dom) {
+              const etor = ctx.flowRoot.createLogicalNodeEvaluator();
+              anchor.dom = anchor.box.acceptEvaluator(etor) as HTMLElement;
+            }
+            if (anchor.dom && win.childElementCount === 0) {
+              const cloneDOM = anchor.dom.cloneNode(true) as HTMLElement;
+              cloneDOM.style.left = "";
+              cloneDOM.style.top = "";
+              cloneDOM.style.right = "";
+              cloneDOM.style.bottom = "";
+              cloneDOM.style.position = "relative";
+              win.appendChild(cloneDOM);
             }
             ctx.dom.appendChild(win);
           };
