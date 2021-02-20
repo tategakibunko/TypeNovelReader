@@ -40,7 +40,7 @@ export class NehanAnchorService {
             // console.log(`click anchor:${anchorName}`);
             // get anchor dynamically.
             const anchor = ctx.flowRoot.getAnchor(anchorName);
-            console.log(anchor);
+            // console.log(anchor);
             // console.log(`selected anchor:index = ${anchor.pageIndex}`);
             if (!anchor) {
               // console.error(`anchor(${anchor.name}) not found!`);
