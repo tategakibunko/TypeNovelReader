@@ -3,7 +3,7 @@
   "author": "Watanabe Masaki",
   "description": "Reader application for TypeNovel format",
   "productName": "TypeNovelReader",
-  "version": "1.7.1",
+  "version": "1.7.2",
   "main": "electron/dist/electron/main.js",
   "scripts": {
     "ng": "ng",
