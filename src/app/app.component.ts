@@ -36,6 +36,7 @@ import { NehanImgService } from './nehan-img.service';
 import { NehanHeaderService } from './nehan-header.service';
 import { NehanBodyService } from './nehan-body.service';
 import { NehanRubyService } from './nehan-ruby.service';
+import { NehanAnchorService } from './nehan-anchor.service';
 import { NehanSpeechBubbleService } from './nehan-speech-bubble.service';
 import { NehanSbTableService } from './nehan-sb-table.service';
 import { NovelDataService } from './novel-data.service';
@@ -146,6 +147,7 @@ export class AppComponent implements OnInit {
     private nehanTip: NehanTipService,
     private nehanIcon: NehanIconService,
     private nehanNotes: NehanNotesService,
+    private nehanAnchor: NehanAnchorService,
     private nehanImg: NehanImgService,
     private nehanHeader: NehanHeaderService,
     private nehanSpeechBubble: NehanSpeechBubbleService,
@@ -447,7 +449,16 @@ export class AppComponent implements OnInit {
       this.createNotesStyle(),
       this.createSpeakStyle(),
       this.createSbTableStyle(),
+      this.createAnchorStyle(),
     ];
+  }
+
+  createAnchorStyle(): Nehan.CssStyleSheet {
+    return this.nehanAnchor.create({
+      onClickAnchorLink: (anchor: Nehan.Anchor) => {
+        this.setPage(anchor.pageIndex);
+      }
+    });
   }
 
   createSbTableStyle(): Nehan.CssStyleSheet {
@@ -537,29 +548,8 @@ export class AppComponent implements OnInit {
     }
     this.tocLinks = this.createTocLinks(this.$toc);
     this.curToc = this.setCurrentToc(this.pageIndex);
-    this.setAnchorJump(this.reader.getPage(0).dom as HTMLElement);
+    // this.setAnchorJump(this.reader.getPage(0).dom as HTMLElement);
   }
-
-  /*
-  setupShortcut() {
-    this.hkey.add(new Hotkey('left', (event: KeyboardEvent): boolean => {
-      this.setLeftPage();
-      return false;
-    }));
-    this.hkey.add(new Hotkey('right', (event: KeyboardEvent): boolean => {
-      this.setRightPage();
-      return false;
-    }));
-    this.hkey.add(new Hotkey('j', (event: KeyboardEvent): boolean => {
-      this.setNextPage();
-      return false;
-    }));
-    this.hkey.add(new Hotkey('k', (event: KeyboardEvent): boolean => {
-      this.setPrevPage();
-      return false;
-    }));
-  }
-  */
 
   createTocLinks(tocDom: HTMLElement): TocLink[] {
     return Array.from(tocDom.querySelectorAll('a')).map(a => {
@@ -624,7 +614,7 @@ export class AppComponent implements OnInit {
     }
     this.onPage(page);
     this.curToc = this.setCurrentToc(index);
-    this.setAnchorJump(page.dom as HTMLElement);
+    // this.setAnchorJump(page.dom as HTMLElement);
   }
 
   @HostListener('document:keydown.arrowleft')
@@ -677,6 +667,7 @@ export class AppComponent implements OnInit {
     return undefined;
   }
 
+  /*
   setAnchorJump(dom: HTMLElement) {
     const anchorLinks = Array.from(dom.querySelectorAll('a')).filter(a => a.href.indexOf('#') >= 0);
     anchorLinks.forEach(link => {
@@ -690,6 +681,7 @@ export class AppComponent implements OnInit {
       }
     });
   }
+  */
 
   sliderChange(event: MatSliderChange) {
     this.setPage(event.value);
