@@ -17,44 +17,51 @@ export class NehanAnchorService {
     return new CssStyleSheet({
       "a[href^=#]": {
         "@create": (ctx: DomCallbackContext) => {
+          const linkDOM = ctx.dom;
+          const containerDOM = ctx.dom.parentElement ? ctx.dom.parentElement : ctx.dom;
+          const panelDOM = document.createElement("div");
           const element = ctx.box.env.element;
           const href = element.getAttribute("href");
           const anchorName = href.substring(1);
-          const win = document.createElement("div");
           const isVert = ctx.box.env.writingMode.isTextVertical();
-          win.style.padding = "1rem";
-          win.style.border = "1px solid #dadada";
-          win.style.position = "absolute";
-          win.style.background = "white";
-          win.style.zIndex = "100";
+
+          panelDOM.style.padding = "1rem";
+          panelDOM.style.border = "1px solid #dadada";
+          panelDOM.style.position = "absolute";
+          panelDOM.style.background = "white";
+          panelDOM.style.zIndex = "100";
+
+          // console.log("@create anchor link:", ctx);
+
           if (isVert) {
-            win.style.left = `${ctx.dom.offsetLeft + ctx.box.extent + 5}px`;
-            win.style.top = `${ctx.dom.offsetTop}px`;
+            panelDOM.style.left = `${linkDOM.offsetLeft + ctx.box.extent + 5}px`;
+            panelDOM.style.top = `${linkDOM.offsetTop}px`;
           } else {
-            win.style.left = `${ctx.dom.offsetLeft}px`;
-            win.style.top = `${ctx.dom.offsetTop + ctx.box.extent + 5}px`;
+            panelDOM.style.left = `${linkDOM.offsetLeft}px`;
+            panelDOM.style.top = `${linkDOM.offsetTop + ctx.box.extent + 5}px`;
           }
 
-          // console.log("create anchor(%s), target:%o", href, anchor);
-          ctx.dom.addEventListener("click", (e: Event) => {
+          linkDOM.addEventListener("click", (e: Event) => {
             const anchor = ctx.flowRoot.getAnchor(anchorName);
             if (!anchor) {
               return false;
             }
             e.preventDefault();
-            if (ctx.dom.contains(win)) {
-              ctx.dom.removeChild(win);
+            if (containerDOM.contains(panelDOM)) {
+              containerDOM.removeChild(panelDOM);
             }
             args.onClickAnchorLink(anchor);
             return false;
           });
-          ctx.dom.addEventListener("setpage", (e: Event) => {
-            if (ctx.dom.contains(win)) {
-              ctx.dom.removeChild(win);
+
+          linkDOM.addEventListener("setpage", (e: Event) => {
+            if (containerDOM.contains(panelDOM)) {
+              containerDOM.removeChild(panelDOM);
             }
           });
-          ctx.dom.onmouseover = (e) => {
-            if (ctx.dom.contains(win)) {
+
+          linkDOM.onmouseover = (e) => {
+            if (containerDOM.contains(panelDOM)) {
               return;
             }
             const anchor = ctx.flowRoot.getAnchor(anchorName);
@@ -68,20 +75,21 @@ export class NehanAnchorService {
               const etor = ctx.flowRoot.createLogicalNodeEvaluator();
               anchor.dom = anchor.box.acceptEvaluator(etor) as HTMLElement;
             }
-            if (anchor.dom && win.childElementCount === 0) {
+            if (anchor.dom && panelDOM.childElementCount === 0) {
               const cloneDOM = anchor.dom.cloneNode(true) as HTMLElement;
               cloneDOM.style.left = "";
               cloneDOM.style.top = "";
               cloneDOM.style.right = "";
               cloneDOM.style.bottom = "";
               cloneDOM.style.position = "relative";
-              win.appendChild(cloneDOM);
+              panelDOM.appendChild(cloneDOM);
             }
-            ctx.dom.appendChild(win);
+            containerDOM.appendChild(panelDOM);
           };
-          ctx.dom.onmouseout = (e) => {
-            if (ctx.dom.contains(win)) {
-              ctx.dom.removeChild(win);
+
+          linkDOM.onmouseout = (e) => {
+            if (containerDOM.contains(panelDOM)) {
+              containerDOM.removeChild(panelDOM);
             }
           };
         }
@@ -89,4 +97,3 @@ export class NehanAnchorService {
     });
   }
 }
-
