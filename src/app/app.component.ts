@@ -455,6 +455,7 @@ export class AppComponent implements OnInit {
 
   createAnchorStyle(): Nehan.CssStyleSheet {
     return this.nehanAnchor.create({
+      previewSpacing: 5,
       onClickAnchorLink: (anchor: Nehan.Anchor) => {
         this.setPage(anchor.pageIndex);
       }
