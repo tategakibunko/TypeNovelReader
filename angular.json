@@ -29,7 +29,8 @@
             ],
             "styles": [
               "src/styles.scss",
-              "./semantic-ui/semantic.min.css"
+              "./semantic-ui/semantic.min.css",
+              "node_modules/katex/dist/katex.min.css"
             ],
             "scripts": []
           },
