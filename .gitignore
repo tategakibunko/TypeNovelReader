@@ -56,3 +56,4 @@ release/linux-unpacked
 # My private file. Don't remove this.
 Makefile
 *.orig
+*.txt
