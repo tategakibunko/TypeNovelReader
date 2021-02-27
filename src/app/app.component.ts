@@ -37,6 +37,8 @@ import { NehanHeaderService } from './nehan-header.service';
 import { NehanBodyService } from './nehan-body.service';
 import { NehanRubyService } from './nehan-ruby.service';
 import { NehanAnchorService } from './nehan-anchor.service';
+import { NehanKatexService } from './nehan-katex.service';
+import { NehanCodeHighlightService } from './nehan-code-highlight.service';
 import { NehanSpeechBubbleService } from './nehan-speech-bubble.service';
 import { NehanSbTableService } from './nehan-sb-table.service';
 import { NovelDataService } from './novel-data.service';
@@ -148,6 +150,8 @@ export class AppComponent implements OnInit {
     private nehanIcon: NehanIconService,
     private nehanNotes: NehanNotesService,
     private nehanAnchor: NehanAnchorService,
+    private nehanMath: NehanKatexService,
+    private nehanCode: NehanCodeHighlightService,
     private nehanImg: NehanImgService,
     private nehanHeader: NehanHeaderService,
     private nehanSpeechBubble: NehanSpeechBubbleService,
@@ -420,22 +424,7 @@ export class AppComponent implements OnInit {
 
   createStyles(config: ReaderConfig): Nehan.CssStyleSheet[] {
     const basePath = this.compileResult.env.resourcePath;
-    if (!this.enableSemanticUI) {
-      return [
-        Nehan.SemanticStyle.create({ all: true }),
-        this.nehanBody.create(config),
-        this.nehanOthers.create(),
-        this.nehanHeader.create(),
-        this.nehanImg.create({ basePath }),
-        this.nehanIcon.create(),
-        this.nehanSpeechBubble.create({ direction: 'start' }),
-        this.nehanSpeechBubble.create({ direction: 'end' }),
-        this.createTipStyle(),
-        this.createNotesStyle(),
-        this.createSbTableStyle(),
-      ];
-    }
-    return [
+    const styles = [
       Nehan.SemanticStyle.create({ all: true }),
       this.nehanBody.create(config),
       this.nehanOthers.create(),
@@ -444,13 +433,18 @@ export class AppComponent implements OnInit {
       this.nehanIcon.create(),
       this.nehanSpeechBubble.create({ direction: 'start' }),
       this.nehanSpeechBubble.create({ direction: 'end' }),
-      this.nehanScene.create(),
       this.createTipStyle(),
       this.createNotesStyle(),
       this.createSpeakStyle(),
       this.createSbTableStyle(),
       this.createAnchorStyle(),
+      this.nehanMath.create({}),
+      this.nehanCode.create({}),
     ];
+    if (this.enableSemanticUI) {
+      styles.push(this.nehanScene.create());
+    }
+    return styles;
   }
 
   createAnchorStyle(): Nehan.CssStyleSheet {
