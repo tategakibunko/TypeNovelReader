@@ -15,7 +15,7 @@ export class NehanOthersService {
       'p.line': {
         margin: '0'
       },
-      blockquote: {
+      'blockquote': {
         fontSize: '0.9em',
         fontFamily: this.dfont.getFontFamilyFromFontType('gothic'),
         backgroundColor: 'white',
@@ -24,6 +24,13 @@ export class NehanOthersService {
         borderStartWidth: '2px',
         padding: '0.4em',
         margin: '1.5em'
+      },
+      'pre': {
+        margin: '1em 0',
+        padding: '1em',
+        border: '1px solid #ddd',
+        backgroundColor: 'white',
+        '!border-break': Nehan.DynamicStyleUtils.smartBorderBreak,
       },
       '.gap-start': {
         marginStart: '1em'
