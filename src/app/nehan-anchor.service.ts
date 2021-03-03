@@ -71,39 +71,25 @@ export class NehanAnchorService {
     }
   }
 
-  private getAnchorBlockPos(node: ILogicalNode): LogicalCursorPos {
-    let parent: any = node;
-    while (true) {
-      if (!parent) {
-        break;
-      }
-      if (parent.pos) {
-        return parent.pos;
-      }
-      parent = parent.parent;
-    }
-    return LogicalCursorPos.zero;
-  }
-
-  private getAnchorLinkPos(flowRoot: IFlowRootFormatContext, node: ILogicalNode, anchorLinkDOM: HTMLElement): Pos {
+  private getAnchorLinkPos(flowRoot: IFlowRootFormatContext, node: ILogicalNode): Pos {
     const bodySize = this.getBodySize(flowRoot);
-    const anchorBlockPos = this.getAnchorBlockPos(node);
+    const offsetPos = node.boxPos.offsetPos;
     const mode = node.env.writingMode;
     if (mode.isTextHorizontal()) {
       return {
-        x: anchorLinkDOM.offsetLeft,
-        y: anchorBlockPos.before,
+        x: offsetPos.start,
+        y: offsetPos.before,
       };
     }
     if (mode.isVerticalRl()) {
       return {
-        x: bodySize.width - anchorBlockPos.before - node.extent,
-        y: anchorLinkDOM.offsetTop,
+        x: bodySize.width - offsetPos.before - node.extent,
+        y: offsetPos.start,
       };
     }
     return {
-      x: anchorBlockPos.before,
-      y: anchorLinkDOM.offsetTop,
+      x: offsetPos.before,
+      y: offsetPos.start,
     };
   }
 
@@ -191,17 +177,10 @@ export class NehanAnchorService {
               const anchorTargetDOM = this.createAnchorTargetDOM(anchor.dom);
               previewContDOM.appendChild(anchorTargetDOM);
             }
-            const anchorLinkPos = this.getAnchorLinkPos(ctx.flowRoot, ctx.box, anchorLinkDOM);
+            const anchorLinkPos = this.getAnchorLinkPos(ctx.flowRoot, ctx.box);
             const anchorLinkSize = this.getLogicalNodeSize(ctx.box);
             const previewSize = this.getPreviewSize(anchor.box, args.previewSpacing);
             const previewPos = this.getPreviewPos(writingMode, bodySize, anchorLinkPos, anchorLinkSize, previewSize, args.previewSpacing);
-
-            // console.log("flowRoot:", ctx.flowRoot);
-            // console.log("bodySize:", bodySize);
-            // console.log("anchorLinkPos:", anchorLinkPos);
-            // console.log("anchorLinkSize:", anchorLinkSize);
-            // console.log("previewSize:", previewSize);
-            // console.log("previewPos:", previewPos);
 
             previewContDOM.style.left = `${previewPos.x}px`;
             previewContDOM.style.top = `${previewPos.y}px`;
