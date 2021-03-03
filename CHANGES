@@ -6,6 +6,10 @@ Mark "*": bug fixed.
 Mark "!": change that can break compatibility with older version
 ===============================================================================
 
+version 1.7.5
+=========================
+o Updated nehan(v7.6.4 -> v7.6.5).
+
 version 1.7.4, 2021/02/27
 =========================
 o Updated nehan(v7.6.1 -> v7.6.3).
