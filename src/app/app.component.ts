@@ -120,7 +120,7 @@ export class AppComponent implements OnInit {
   public lastSeekPos: number;
   public startPageIndex: number;
   public compileResult: CompileResult | undefined;
-  public reader: Nehan.PagedHtmlDocument;
+  public reader: Nehan.PagedNehanDocument;
   public pageIndex: number;
   public tocLinks: TocLink[] = [];
   public config: ReaderConfig = { ...InitialConfig };
@@ -396,7 +396,7 @@ export class AppComponent implements OnInit {
     });
   }
 
-  createReader(html: string): Nehan.PagedHtmlDocument {
+  createReader(html: string): Nehan.PagedNehanDocument {
     this.pageIndex = 0;
     this.tocLinks = [];
     if (this.isFirstCompile) {
@@ -405,7 +405,7 @@ export class AppComponent implements OnInit {
     }
     const html2 = this.compileHTML(html);
     // console.log('compiled html:', html2);
-    const reader = new Nehan.PagedHtmlDocument(html2, {
+    const reader = new Nehan.PagedNehanDocument(html2, {
       styleSheets: this.createStyles(this.config)
     });
     reader.render({
