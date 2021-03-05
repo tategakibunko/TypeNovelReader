@@ -1,4 +1,6 @@
 
+import { BufferEncoding } from 'globals';
+
 export interface TocLink {
   a: HTMLElement;
   index: number;
@@ -22,7 +24,8 @@ export interface CompileEnv {
   configFilePath?: string;
   dataFilePath: string;
   tempPath: string; // for zipped target
-  textEncoding: string;
+  // textEncoding: string;
+  textEncoding: BufferEncoding;
 }
 
 export const TnConfigFileName = 'tnconfig.json';
@@ -35,7 +38,8 @@ export const InitialCompileEnv: CompileEnv = {
   userDataPath: '',
   dataFilePath: '',
   tempPath: '',
-  textEncoding: 'UTF-8',
+  // textEncoding: 'UTF-8',
+  textEncoding: 'utf-8',
 };
 
 export interface CompileResult {
