@@ -42,7 +42,8 @@ function createWindow() {
   win = new BrowserWindow({
     ...lastWinBounds,
     webPreferences: {
-      nodeIntegration: true
+      // preload: './preload.js',
+      nodeIntegration: true,
     }
   });
 
