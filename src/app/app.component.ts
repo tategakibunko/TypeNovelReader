@@ -8,7 +8,6 @@ import { remote } from 'electron';
 import { MatSliderChange } from '@angular/material/slider';
 import { fromEvent, timer } from 'rxjs';
 import { debounce } from 'rxjs/operators';
-// import { HotkeysService, Hotkey } from 'angular2-hotkeys';
 import {
   CompileResult,
   TocLink,
@@ -36,9 +35,6 @@ import { NehanImgService } from './nehan-img.service';
 import { NehanHeaderService } from './nehan-header.service';
 import { NehanBodyService } from './nehan-body.service';
 import { NehanRubyService } from './nehan-ruby.service';
-import { NehanAnchorService } from './nehan-anchor.service';
-import { NehanKatexService } from './nehan-katex.service';
-import { NehanCodeHighlightService } from './nehan-code-highlight.service';
 import { NehanSpeechBubbleService } from './nehan-speech-bubble.service';
 import { NehanSbTableService } from './nehan-sb-table.service';
 import { NovelDataService } from './novel-data.service';
@@ -51,6 +47,9 @@ import { CharactersDialogComponent } from './characters-dialog/characters-dialog
 import { ComponentPortal } from '@angular/cdk/portal';
 import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { MatSpinner } from '@angular/material/progress-spinner';
+import * as NehanAnchor from 'nehan-anchor';
+import * as NehanKatex from 'nehan-katex';
+import * as NehanHighlight from 'nehan-highlight';
 
 const DialogWidth = 500;
 const ResizeEventDelay = 500;
@@ -135,7 +134,6 @@ export class AppComponent implements OnInit {
     private overlay: Overlay,
     private tnc: TncService,
     private el: ElementRef,
-    // private hkey: HotkeysService,
     private cdr: ChangeDetectorRef,
     private dialog: MatDialog,
     private dfont: DeviceFontService,
@@ -149,9 +147,9 @@ export class AppComponent implements OnInit {
     private nehanTip: NehanTipService,
     private nehanIcon: NehanIconService,
     private nehanNotes: NehanNotesService,
-    private nehanAnchor: NehanAnchorService,
-    private nehanMath: NehanKatexService,
-    private nehanCode: NehanCodeHighlightService,
+    // private nehanAnchor: NehanAnchorService,
+    // private nehanMath: NehanKatexService,
+    // private nehanCode: NehanCodeHighlightService,
     private nehanImg: NehanImgService,
     private nehanHeader: NehanHeaderService,
     private nehanSpeechBubble: NehanSpeechBubbleService,
@@ -438,8 +436,8 @@ export class AppComponent implements OnInit {
       this.createSpeakStyle(),
       this.createSbTableStyle(),
       this.createAnchorStyle(),
-      this.nehanMath.create({}),
-      this.nehanCode.create({}),
+      this.createKatexStyle(),
+      this.createHighlightStyle(),
     ];
     if (this.enableSemanticUI) {
       styles.push(this.nehanScene.create());
@@ -447,8 +445,16 @@ export class AppComponent implements OnInit {
     return styles;
   }
 
+  createHighlightStyle(): Nehan.CssStyleSheet {
+    return NehanHighlight.create({});
+  }
+
+  createKatexStyle(): Nehan.CssStyleSheet {
+    return NehanKatex.create({});
+  }
+
   createAnchorStyle(): Nehan.CssStyleSheet {
-    return this.nehanAnchor.create({
+    return NehanAnchor.create({
       previewSpacing: 5,
       onClickAnchorLink: (anchor: Nehan.Anchor) => {
         this.setPage(anchor.pageIndex);
