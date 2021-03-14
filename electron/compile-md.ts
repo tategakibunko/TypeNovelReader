@@ -1,5 +1,5 @@
 import { BrowserWindow } from 'electron';
-import { Renderer, Marked } from 'marked-ts';
+import { Renderer, parse, setOptions } from 'marked';
 import { CompileEnv, CompileResult } from '../common/models';
 import { loadNovelData, loadText } from './compile-env';
 
@@ -12,12 +12,12 @@ renderer.code = (code: string, exinfo?: string, escaped?: boolean): string => {
   const codeOpen = lang ? `<code class="lang-${lang}">` : "<code>";
   return `${preOpen}${codeOpen}${code}</code></pre>`;
 }
-Marked.setOptions({ renderer });
+setOptions({ renderer });
 
 export function compileMarkdown(win: BrowserWindow, env: CompileEnv) {
   // const text = fs.readFileSync(env.targetFilePath, { encoding: env.textEncoding });
   const text = loadText(env.targetFilePath, env.textEncoding);
-  const html = Marked.parse(text);
+  const html = parse(text);
   const errors = [];
   const data = loadNovelData(env);
   const result: CompileResult = { env, html, errors, data };

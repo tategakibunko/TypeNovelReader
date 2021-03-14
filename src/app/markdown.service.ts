@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Renderer, Marked } from 'marked-ts';
+import { Renderer, parse, setOptions } from 'marked';
 
 @Injectable({
   providedIn: 'root'
@@ -16,11 +16,11 @@ export class MarkdownService {
       const codeOpen = lang ? `<code class="lang-${lang}">` : "<code>";
       return `${preOpen}${codeOpen}${code}</code></pre>`;
     }
-    Marked.setOptions({ renderer: this.renderer });
+    setOptions({ renderer: this.renderer });
   }
 
   compile(src: string): string {
-    const markedOutput = Marked.parse(src);
+    const markedOutput = parse(src);
     // console.log("marked:%s", markedOutput);
     return markedOutput;
   }
