@@ -38,6 +38,7 @@
     "nehan-anchor": "^0.0.1",
     "nehan-highlight": "^0.0.1",
     "nehan-katex": "^0.0.2",
+    "nehan-speech-border": "^0.0.1",
     "rxjs": "~6.6.7",
     "tslib": "^2.1.0",
     "typenovel": "^1.2.0",
