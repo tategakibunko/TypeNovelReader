@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CssStyleSheet, DomCallbackContext } from '../../../nehan';
+import { CssStyleSheet, DomCallbackContext } from 'nehan';
 import { InfoDialogData } from '../../common/models';
 
 interface NotesArgs {

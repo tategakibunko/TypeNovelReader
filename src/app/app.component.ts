@@ -50,6 +50,7 @@ import { MatSpinner } from '@angular/material/progress-spinner';
 import * as NehanAnchor from 'nehan-anchor';
 import * as NehanKatex from 'nehan-katex';
 import * as NehanHighlight from 'nehan-highlight';
+import * as NehanSpeechBorder from 'nehan-speech-border';
 
 const DialogWidth = 500;
 const ResizeEventDelay = 500;
@@ -429,8 +430,8 @@ export class AppComponent implements OnInit {
       this.nehanHeader.create(),
       this.nehanImg.create({ basePath }),
       this.nehanIcon.create(),
-      this.nehanSpeechBubble.create({ direction: 'start' }),
-      this.nehanSpeechBubble.create({ direction: 'end' }),
+      this.createSpeechBorderStyle("start"),
+      this.createSpeechBorderStyle("end"),
       this.createTipStyle(),
       this.createNotesStyle(),
       this.createSpeakStyle(),
@@ -443,6 +444,10 @@ export class AppComponent implements OnInit {
       styles.push(this.nehanScene.create());
     }
     return styles;
+  }
+
+  createSpeechBorderStyle(direction: Nehan.LogicalEdgeDirection): Nehan.CssStyleSheet {
+    return NehanSpeechBorder.create({ selector: ".speech-bubble", direction });
   }
 
   createHighlightStyle(): Nehan.CssStyleSheet {
