@@ -35,7 +35,7 @@
     "md5": "^2.3.0",
     "nehan": "^7.8.0",
     "nehan-anchor": "^0.0.1",
-    "nehan-highlight": "^0.1.1",
+    "nehan-highlight": "^0.1.2",
     "nehan-katex": "^0.0.3",
     "nehan-speech-border": "^0.0.1",
     "rxjs": "~6.6.7",
