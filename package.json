@@ -39,7 +39,7 @@
     "nehan-katex": "^0.0.3",
     "nehan-speech-border": "^0.0.1",
     "rxjs": "~6.6.7",
-    "tslib": "^2.2.0",
+    "tslib": "^2.3.0",
     "typenovel": "^1.2.0",
     "typescript": "~4.2.4",
     "yauzl": "^2.10.0",
