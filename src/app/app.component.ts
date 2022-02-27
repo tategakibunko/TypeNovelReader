@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { TncService } from './tnc.service';
 import * as path from 'path';
 import * as Nehan from 'nehan';
-import { remote } from 'electron';
+import { shell } from 'electron';
 import { MatSliderChange } from '@angular/material/slider';
 import { fromEvent, timer } from 'rxjs';
 import { debounce } from 'rxjs/operators';
@@ -325,8 +325,8 @@ export class AppComponent implements OnInit {
   openHomepage() {
     // openExternalSync is deprecated in electron(v7).
     // https://github.com/sindresorhus/caprine/issues/1153
-    // remote.shell.openExternalSync(this.homepage);
-    remote.shell.openExternal(this.homepage);
+    // remoteshell.openExternalSync(this.homepage);
+    shell.openExternal(this.homepage);
   }
 
   openInfoDialog(data: InfoDialogData) {

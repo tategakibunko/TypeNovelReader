@@ -8,7 +8,8 @@ export class Store {
   public data: any;
 
   constructor(configName: string) {
-    const userDataPath = (electron.app || electron.remote.app).getPath('userData');
+    // const userDataPath = (electron.app || electron.remote.app).getPath('userData');
+    const userDataPath = electron.app.getPath('userData');
     this.path = path.join(userDataPath, configName + '.json');
     this.data = this.loadDataFile(this.path);
   }
