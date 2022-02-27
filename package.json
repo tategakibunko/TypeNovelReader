@@ -31,7 +31,7 @@
     "@angular/router": "~13.2.4",
     "encoding-japanese": "^1.0.29",
     "katex": "^0.15.2",
-    "marked": "^2.0.3",
+    "marked": "^4.0.12",
     "md5": "^2.3.0",
     "nehan": "^7.8.0",
     "nehan-anchor": "^0.0.1",
